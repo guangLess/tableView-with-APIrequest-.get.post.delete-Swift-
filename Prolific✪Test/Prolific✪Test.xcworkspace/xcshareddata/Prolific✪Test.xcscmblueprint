@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "90D322318F41C2F8DD8DF3F7325D78FC8AB461D7",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "DA2B3A1B1243279AB994EA5578D36D8F7F2307C3" : 0,
+    "90D322318F41C2F8DD8DF3F7325D78FC8AB461D7" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A23C0E21-0223-4CB0-80BA-A00D8A58EF73",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "DA2B3A1B1243279AB994EA5578D36D8F7F2307C3" : "",
+    "90D322318F41C2F8DD8DF3F7325D78FC8AB461D7" : "1stbitbucket-guang\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Prolific✪Test",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Prolific✪Test\/Prolific✪Test.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/Guang-Z\/1stbitbucket-guang.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "90D322318F41C2F8DD8DF3F7325D78FC8AB461D7"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/Guang-Z\/1stbitbucket-guang.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DA2B3A1B1243279AB994EA5578D36D8F7F2307C3"
+    }
+  ]
+}
