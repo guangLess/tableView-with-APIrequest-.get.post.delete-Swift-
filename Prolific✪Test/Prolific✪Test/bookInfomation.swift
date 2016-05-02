@@ -7,16 +7,6 @@
 //
 
 import Foundation
-/*
- "author": "Zigurd Mednieks, Laird Dornin, G. Blake Meike, Masumi Nakamura",
- "categories": "android",
- "id": 2,
- "lastCheckedOut": null,
- "lastCheckedOutBy": null,
- "publisher": "O'Reilly Media",
- "title": "Programming Android",
- "url": "/books/2/"
- */
 
 
 /*
@@ -56,25 +46,5 @@ struct bookInfomation {
             ]
         }
     }
-    
-    /*
-    
-    static func jsonArray(array : [bookInfomation]) -> String
-    {
-        return "[" + array.map {$0.jsonRepresentation}.joinWithSeparator(",") + "]"
-    }
-    
-    var jsonRepresentation : String {
-        //{"author": "Jason Morris", "categories": "interface, ui, android", "id": 1, "lastCheckedOut": null, "lastCheckedOutBy": null, "title": "User Interface Development: Beginner's Guide", "url": "/books/1/"}
-        //{\"sentence\":\"\(sentence)\",\"lang\":\"\(lang)\"}
-        return "{\"author\":\"\(", "categories": "interface, ui, android", "id": 1, "lastCheckedOut": null, "lastCheckedOutBy": null, "title": "User Interface Development: Beginner's Guide", "url": "/books/1/"}"
 
-    }
-
-
-let sentences = [Sentence(sentence: "Hello world", lang: "en"), Sentence(sentence: "Hallo Welt", lang: "de")]
-let jsonArray = Sentence.jsonArray(sentences)
-print(jsonArray) // [{"sentence":"Hello world","lang":"en"},{"sentence":"Hallo Welt","lang":"de"}]
-  
- */
 }

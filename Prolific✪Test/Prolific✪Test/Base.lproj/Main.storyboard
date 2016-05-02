@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,11 +17,72 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="119" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0b1-xI-j35">
+                                <rect key="frame" x="0.0" y="61" width="600" height="539"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" restorationIdentifier="cell" selectionStyle="blue" indentationWidth="3" reuseIdentifier="cell" rowHeight="112" id="FVf-7X-grK" customClass="BookTableViewCell" customModule="Prolific_Test" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="112"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FVf-7X-grK" id="AP7-ah-dWP">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="112"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBX-Oj-xCZ">
+                                                    <rect key="frame" x="42" y="19" width="558" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="nBv-wr-nde"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRq-VR-n2e">
+                                                    <rect key="frame" x="42" y="79" width="558" height="33"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="FBX-Oj-xCZ" firstAttribute="leading" secondItem="AP7-ah-dWP" secondAttribute="leadingMargin" constant="34" id="4Sn-0z-7OA"/>
+                                                <constraint firstItem="hRq-VR-n2e" firstAttribute="top" secondItem="FBX-Oj-xCZ" secondAttribute="bottom" constant="30" id="DsS-Qf-N9i"/>
+                                                <constraint firstAttribute="trailing" secondItem="FBX-Oj-xCZ" secondAttribute="trailing" id="G1Y-cw-hEs"/>
+                                                <constraint firstItem="FBX-Oj-xCZ" firstAttribute="trailing" secondItem="hRq-VR-n2e" secondAttribute="trailing" id="R83-dP-zv3"/>
+                                                <constraint firstItem="FBX-Oj-xCZ" firstAttribute="leading" secondItem="hRq-VR-n2e" secondAttribute="leading" id="WfD-Ul-Has"/>
+                                                <constraint firstItem="FBX-Oj-xCZ" firstAttribute="top" secondItem="AP7-ah-dWP" secondAttribute="topMargin" constant="11" id="vsl-EP-Irn"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="authorLabel" destination="hRq-VR-n2e" id="vW0-PN-lyI"/>
+                                            <outlet property="titleLabel" destination="FBX-Oj-xCZ" id="2rn-Uv-gFS"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="E6X-IQ-uRU"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="mFR-uR-Hkf"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0b1-xI-j35" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="HUT-pf-vmC"/>
+                            <constraint firstItem="0b1-xI-j35" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="41" id="cTA-io-Xqh"/>
+                            <constraint firstAttribute="trailing" secondItem="0b1-xI-j35" secondAttribute="trailing" id="dHd-ar-3cR"/>
+                            <constraint firstItem="0b1-xI-j35" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="plO-V0-zmb"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bookTableView" destination="0b1-xI-j35" id="uFQ-k5-8c2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="457" y="246"/>
         </scene>
     </scenes>
 </document>
