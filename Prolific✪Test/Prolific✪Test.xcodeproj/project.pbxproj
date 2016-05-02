@@ -17,6 +17,7 @@
 		624C02531CD3D8EE009F90B3 /* bookInfomation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624C02521CD3D8EE009F90B3 /* bookInfomation.swift */; };
 		624C02551CD7B289009F90B3 /* BookApiCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624C02541CD7B289009F90B3 /* BookApiCall.swift */; };
 		624C02571CD7CBC3009F90B3 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624C02561CD7CBC3009F90B3 /* BookTableViewCell.swift */; };
+		624C02591CD7EC7E009F90B3 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624C02581CD7EC7E009F90B3 /* BookDetailViewController.swift */; };
 		C4B8E8A6C3F0592F726337A4 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 572B6A2B35E68AC877E6999E /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		624C02521CD3D8EE009F90B3 /* bookInfomation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bookInfomation.swift; sourceTree = "<group>"; };
 		624C02541CD7B289009F90B3 /* BookApiCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookApiCall.swift; sourceTree = "<group>"; };
 		624C02561CD7CBC3009F90B3 /* BookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
+		624C02581CD7EC7E009F90B3 /* BookDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 		ECFBA6390B6D76BBDB61EABE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +121,7 @@
 				624C02521CD3D8EE009F90B3 /* bookInfomation.swift */,
 				624C02541CD7B289009F90B3 /* BookApiCall.swift */,
 				624C02561CD7CBC3009F90B3 /* BookTableViewCell.swift */,
+				624C02581CD7EC7E009F90B3 /* BookDetailViewController.swift */,
 			);
 			path = "Prolific✪Test";
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 			files = (
 				624C024F1CD3CC66009F90B3 /* SWAGViewController.swift in Sources */,
 				624C02551CD7B289009F90B3 /* BookApiCall.swift in Sources */,
+				624C02591CD7EC7E009F90B3 /* BookDetailViewController.swift in Sources */,
 				624C02531CD3D8EE009F90B3 /* bookInfomation.swift in Sources */,
 				624C02571CD7CBC3009F90B3 /* BookTableViewCell.swift in Sources */,
 				624C02211CD3C022009F90B3 /* AppDelegate.swift in Sources */,

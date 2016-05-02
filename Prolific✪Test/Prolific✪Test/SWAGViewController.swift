@@ -11,6 +11,7 @@ import UIKit
 class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var bookTableView: UITableView!
+    @IBOutlet weak var testLabel: UILabel!
     
     //var bookArray = [bookInfomation]()
     let bookDataUrl = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books?"
@@ -30,6 +31,7 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         bookTableView.dataSource = self
         bookTableView.delegate = self
+        testLabel.text = "This is a test!"
         
         //bookTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
@@ -64,5 +66,28 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("cell selected")
+        
+        /*
+         pageVC.imageObjects = self.hgImageDataStore.pictureArray
+         pageVC.tappedCellIndex = indexPath.row
+         
+         self.navigationController?.pushViewController(pageVC, animated: true)
+        */
+        
+        //let detailBook = BookDetailViewController()
+        //detailBook.book = bookDataStore.bookArray[indexPath.row]
+        //self.navigationController?.pushViewController(detailBook as! BookDetailViewController!, animated: true)
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if let cell = sender as? BookTableViewCell {
+            //let i = bookTableView.indexPathForCell(cell)!.row
+            if segue.identifier == "showBookDetail" {
+                let vc = segue.destinationViewController as! BookDetailViewController
+                
+                //vc.data = currentResponse[i] as NSDictionary
+            }
+        }
     }
 }
