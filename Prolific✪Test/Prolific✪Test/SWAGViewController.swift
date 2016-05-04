@@ -12,6 +12,7 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     @IBOutlet weak var bookTableView: UITableView!
     @IBOutlet weak var testLabel: UILabel!
+
     
     //var bookArray = [bookInfomation]()
     let bookDataUrl = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books?"
@@ -23,8 +24,10 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       // bookDataStore.getBookData{_ in
         bookDataStore.getBookData{_ in
-            dispatch_async(dispatch_get_main_queue(), {
+
+        dispatch_async(dispatch_get_main_queue(), {
                 print("block done to main Queue")
                 self.bookTableView.reloadData()
             })
@@ -34,6 +37,18 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
         testLabel.text = "This is a test!"
         
         //bookTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    }
+    
+//    func tableViewPostBookData() {
+//        bookDataStore.postABook { _ in
+//          self.bookTableView.reloadData()
+//        }
+//    }
+    
+    @IBAction func addBookAction(sender: AnyObject) {
+//        bookDataStore.postABook { _ in
+//            self.bookTableView.reloadData()
+//        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,12 +96,11 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if let cell = sender as? BookTableViewCell {
-            //let i = bookTableView.indexPathForCell(cell)!.row
-            if segue.identifier == "showBookDetail" {
-                let vc = segue.destinationViewController as! BookDetailViewController
-                
-                //vc.data = currentResponse[i] as NSDictionary
+       if let cell = sender as? BookTableViewCell {
+            let i = bookTableView.indexPathForCell(cell)!.row
+            if segue.identifier == "segueToBook" {
+                let bookDetailVC = segue.destinationViewController as! BookDetailViewController
+                bookDetailVC.book = bookDataStore.bookArray[i]
             }
         }
     }

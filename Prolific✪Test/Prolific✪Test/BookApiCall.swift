@@ -14,7 +14,7 @@ class BookApiCall {
     
     static let sharedInstance = BookApiCall()
     
-    var bookArray = [bookInfomation]()
+    var bookArray = [BookInfomation]()
     let bookDataUrl = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books?"
 
     func getBookData(completion: ([[String: AnyObject]]) -> Void) {
@@ -59,57 +59,47 @@ class BookApiCall {
                      book.url = eachBook["url"] as? String
                      */
                     self.bookArray.append(book)
-                    
                 }
-                //print("bookArray.count = \(self.bookArray.count) and the last book is = \(self.bookArray.last)")
             }
         }
     }
     
     // can you populated the data model by the api call, instand like book : key .. value, not manuelly typed
-    private func addPropertyToBook(book: [String : AnyObject]) -> bookInfomation {
-        let book = bookInfomation(author: book["author"] as? String , categories: book["categories"] as? String, id:book["id"] as? Int, lastCheckedOut: book["lastCheckedOut"] as? String, lastCheckedOutBy: book["lastCheckedOutBy"] as? String, publisher: book["publisher"] as? String, title: book["title"] as? String, url:book["book.url"] as? String)
+    private func addPropertyToBook(book: [String : AnyObject]) -> BookInfomation {
+        let book = BookInfomation(author: book["author"] as? String , categories: book["categories"] as? String, id:book["id"] as? Int, lastCheckedOut: book["lastCheckedOut"] as? String, lastCheckedOutBy: book["lastCheckedOutBy"] as? String, publisher: book["publisher"] as? String, title: book["title"] as? String, url:book["book.url"] as? String)
         return book
     }
     
-    func postABook() {
-        //let bookParameters = bookInfomation(author: "Guang", categories: "art", id: nil, lastCheckedOut: nil, lastCheckedOutBy: nil, publisher: "life", title: "Coffee and Tea", url: "www.hello.work")
-        
-        // let parameter = bookParameters as [String : AnyObject]
-        let parameter = [  "author": "GuangZZ",
-                           "categories": "iOS",
-                           "id": 13,
-                           "lastCheckedOut": "",
-                           "lastCheckedOutBy": "",
-                           "publisher": "School Of Life",
-                           "title": "Coffee is a Tea's friend",
-                           "url": "nanananan.com"
-        ]
-        
-        let deletedParam = bookInfomation.init(author: "Guang", categories: "art", id: nil, lastCheckedOut: nil, lastCheckedOutBy: nil, publisher: "life", title: "Coffee and Tea", url: "www.hello.work")
-        let pDictionary = deletedParam.dictionary as! [String:AnyObject!]
-       
-        //print("parameterDictionary.dictionary is \(pDictionary)")
-        // I do not know how to unwrap this!
-        
-        Alamofire.request(.DELETE, bookDataUrl, parameters: pDictionary,encoding: .JSON)
+    func postABook(completion:([String: AnyObject]) -> Void) {
+  
+        /*
+         // let parameter = bookParameters as [String : AnyObject]
+         let parameter = [  "author": "GuangZZ",
+         "categories": "iOS",
+         "id": 13,
+         "lastCheckedOut": "",
+         "lastCheckedOutBy": "",
+         "publisher": "School Of Life",
+         "title": "Coffee is a Tea's friend",
+         "url": "nanananan.com"
+         ]
+         */
+        let bookParameters = BookInfomation(author: "Zhu", categories: "job hunting", id: nil, lastCheckedOut: nil, lastCheckedOutBy: "Guang", publisher: "Market", title: "Job hunt is painful", url: "job-hunt")
+        let postedBookDictionary = bookParameters.dictionary
+
+        Alamofire.request(.POST, bookDataUrl, parameters: postedBookDictionary ,encoding: .JSON)
             .validate()
             .responseJSON {
                 response in
                 switch response.result {
                 case .Success :
-                    //self.getBookData()
-                    // Handle success case...
+                    completion(response.result.value as! [String: AnyObject])
                     break
                 case .Failure :
                     // Handle failure case...
+                    
                     break
                 }
         }
-        //}
     }
-
-    
-    
-    
 }
