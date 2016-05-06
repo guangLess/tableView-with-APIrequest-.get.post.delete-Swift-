@@ -9,6 +9,8 @@
 import UIKit
 
 class AddBookViewController: UIViewController, UITextFieldDelegate {
+//class AddBookViewController: UIViewController {
+
     
     @IBOutlet weak var addTitle: UITextField!
     @IBOutlet weak var addAuthor: UITextField!
@@ -39,14 +41,64 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
     @IBAction func BackButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil); // make the animation slower
     }
-    
+   
     @IBAction func submitButton(sender: AnyObject) {
+    }
+ 
+    @IBAction func titleInput(sender: UITextField) {
+        if (checkTextField(sender) == false) {
+            alertViewActive()
+        }
+        print ("title check")
+    }
+    @IBAction func authorInput(sender: UITextField) {
+        if (checkTextField(sender) == false) {
+            alertViewActive()
+        }
+        print ("author  check")
+        
+    }
+    
+    @IBAction func catagrpyInput(sender: UITextField) {
+        if (checkTextField(sender) == false) {
+            alertViewActive()
+        }
+        print ("catagory  check")
+    }
+    @IBAction func publisher(sender: UITextField) {
+        if (checkTextField(sender) == false) {
+            alertViewActive()
+        } // checkk number date?
+        print ("publisher checker")
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        if (textField == addTitle){
+        addTitle.enabled = true
+            addTitle .becomeFirstResponder()
+            return true
+        }
+        if (textField == addAuthor) {
+            addAuthor.enabled = true
+            addAuthor.becomeFirstResponder()
+            return true
+        }
+        if (textField == addPublisher) {
+            addPublisher.enabled = true
+            addPublisher.becomeFirstResponder()
+            return true
+        }
+        if (textField == addCatories){
+            addCatories.enabled = true
+            addCatories.becomeFirstResponder()
+            return true
+        }
+        return false
     }
     
     
-    
     func checkTextField(text: UITextField) -> Bool {
-        
         
         if (text.text?.characters.count == 0) {
             return false
@@ -54,20 +106,7 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         
         return true
     }
-    
-    @IBAction func titleInput(sender: UITextField) {
-        if (checkTextField(sender) == false) {
-            alertViewActive()
-        }
-    }
-    @IBAction func authorInput(sender: AnyObject) {
-    }
-    
-    @IBAction func catagrpyInput(sender: AnyObject) {
-    }
-    @IBOutlet weak var publisherInput: UITextField!
-    
-    
+  
     func alertViewActive() {
         
         let alertController = UIAlertController(title: "Yo, a book shall have a title?", message: "", preferredStyle: .Alert)
@@ -85,7 +124,5 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
             // ...
         }
     }
-    
-    
-
+ 
 }

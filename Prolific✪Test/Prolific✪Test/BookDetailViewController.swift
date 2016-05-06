@@ -50,6 +50,19 @@ class BookDetailViewController: UIViewController {
         if let category = book.categories{
             categoryLabel.text = category
         }else { categoryLabel.text = "no Category Tagged" }
+        
+        let fullText = "Allo,This is book is published by \(book.publisher), last checkOut at \(book.lastCheckedOut), by this person \(book.lastCheckedOutBy). We think this place \(book.publisher) published it! Hope you enjoy it"
+        print(fullText)
     }
  
+    @IBAction func deleteButton(sender: AnyObject) {
+        let bookDataStore : BookApiCall = BookApiCall.sharedInstance
+        
+        let bookId = book.id!
+        bookDataStore.deleteBook(bookId) { (result) in
+            // alertView
+            print("book deleted\(result)")
+        }
+        
+    }
 }

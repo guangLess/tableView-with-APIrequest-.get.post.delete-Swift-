@@ -15,7 +15,7 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     
     //var bookArray = [bookInfomation]()
-    let bookDataUrl = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books?"
+    let bookDataUrl = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books?" // make it static data
     let bookDataStore : BookApiCall = BookApiCall.sharedInstance
     
     private struct Storyboard {
@@ -103,5 +103,10 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 bookDetailVC.book = bookDataStore.bookArray[i]
             }
         }
-    }
+//    if segue.identifier == "addBook" {
+//        let addBookVC = segue.destinationViewController as! AddBookViewController
+//        addBookVC
+//        
+//    }
+ }
 }

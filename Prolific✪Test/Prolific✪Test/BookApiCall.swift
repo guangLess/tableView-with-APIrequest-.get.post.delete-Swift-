@@ -28,12 +28,7 @@ class BookApiCall {
                     return
             }
             print("Response.result.isSuccess: \(response.result.isSuccess)")
-            /*
-            print(response.request)  // original URL request
-            print(response.response) // URL response
-            print(response.data)     // server data
-            print(response.result)
-            */
+            
             if response.result.isSuccess {
                 //print("Response JSON: \(response.result.value)")
                 completion(response.result.value as! [[String: AnyObject]])
@@ -46,18 +41,6 @@ class BookApiCall {
                 for eachBook in response.result.value as! [[String : AnyObject]] {
                     //i+=1
                     let book = self.addPropertyToBook(eachBook)
-                    //self.bookArray.append(book)
-                    /*
-                     var book = bookInfomation()
-                     book.author = eachBook["author"] as? String
-                     book.categories = eachBook["categories"] as? String
-                     book.id =  eachBook["id"] as? Int
-                     book.lastCheckedOut = eachBook["lastCheckedOut"] as? String
-                     book.lastCheckedOutBy = eachBook["lastCheckedOutBy"] as? String
-                     book.publisher = eachBook["publisher"] as? String
-                     book.title = eachBook["title"] as? String
-                     book.url = eachBook["url"] as? String
-                     */
                     self.bookArray.append(book)
                 }
             }
@@ -96,10 +79,23 @@ class BookApiCall {
                     completion(response.result.value as! [String: AnyObject])
                     break
                 case .Failure :
-                    // Handle failure case...
-                    
                     break
                 }
         }
     }
+    
+    func deleteBook(input: Int, completion: (result: String) -> Void) { // change to bool
+        
+    Alamofire.request(.DELETE, "\(bookDataUrl)/\(input)/")
+    .responseJSON { response in
+    guard response.result.error == nil else {
+    // got an error in getting the data, need to handle it
+    print("error\(response.result.error)")
+    return
+    }
+    completion(result: "book deleted!")
+    print("DELETE ok")
+    }
+    
+  }
 }
