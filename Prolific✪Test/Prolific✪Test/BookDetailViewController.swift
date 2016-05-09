@@ -63,6 +63,5 @@ class BookDetailViewController: UIViewController {
             // alertView
             print("book deleted\(result)")
         }
-        
     }
 }

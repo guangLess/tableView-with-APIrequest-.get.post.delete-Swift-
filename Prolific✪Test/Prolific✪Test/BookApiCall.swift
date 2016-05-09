@@ -53,40 +53,32 @@ class BookApiCall {
         return book
     }
     
-    func postABook(completion:([String: AnyObject]) -> Void) {
-  
-        /*
-         // let parameter = bookParameters as [String : AnyObject]
-         let parameter = [  "author": "GuangZZ",
-         "categories": "iOS",
-         "id": 13,
-         "lastCheckedOut": "",
-         "lastCheckedOutBy": "",
-         "publisher": "School Of Life",
-         "title": "Coffee is a Tea's friend",
-         "url": "nanananan.com"
-         ]
-         */
-        let bookParameters = BookInfomation(author: "Zhu", categories: "job hunting", id: nil, lastCheckedOut: nil, lastCheckedOutBy: "Guang", publisher: "Market", title: "Job hunt is painful", url: "job-hunt")
-        let postedBookDictionary = bookParameters.dictionary
-
-        Alamofire.request(.POST, bookDataUrl, parameters: postedBookDictionary ,encoding: .JSON)
+    func postAbook(bookInfo:[String:AnyObject], completion: (result: Bool) -> Void) {
+        let postedBookDictionary = bookInfo
+        Alamofire.request(.POST, bookDataUrl, parameters: postedBookDictionary, encoding: .JSON)
             .validate()
-            .responseJSON {
-                response in
+            .responseJSON { response in
                 switch response.result {
                 case .Success :
-                    completion(response.result.value as! [String: AnyObject])
+                    completion(result: true)
                     break
                 case .Failure :
+                    print(ErrorType)
                     break
                 }
         }
     }
+
     
     func deleteBook(input: Int, completion: (result: String) -> Void) { // change to bool
+    print("bookId is = \(input)")
         
-    Alamofire.request(.DELETE, "\(bookDataUrl)/\(input)/")
+        //var aStr = String(format: "%@%x", "timeNow in hex: ", timeNow)
+    let url = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books"
+    let bookIDURL = String(format:"%@/%@",url,String(input))
+    print(bookIDURL)
+        
+    Alamofire.request(.DELETE, bookIDURL)
     .responseJSON { response in
     guard response.result.error == nil else {
     // got an error in getting the data, need to handle it
@@ -96,6 +88,5 @@ class BookApiCall {
     completion(result: "book deleted!")
     print("DELETE ok")
     }
-    
   }
 }

@@ -9,54 +9,69 @@
 import UIKit
 
 class AddBookViewController: UIViewController, UITextFieldDelegate {
-//class AddBookViewController: UIViewController {
 
-    
     @IBOutlet weak var addTitle: UITextField!
     @IBOutlet weak var addAuthor: UITextField!
     @IBOutlet weak var addCatories: UITextField!
     @IBOutlet weak var addPublisher: UITextField!
+    @IBOutlet weak var submitButtonOutlet: UIButton!
+    
+    var book = BookInfomation()
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         addTitle.delegate = self
         addAuthor.delegate = self
         addCatories.delegate = self
         addPublisher.delegate = self
-        
-        var title = addTitle.text
-        var author = addAuthor.text
-        var catgory = addCatories.text
-        var publisher = addPublisher.text
-        
-        // Do any additional setup after loading the view.
+        submitButtonOutlet.enabled = false
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+// MARK : Submit method
+    @IBAction func submitButtonAction(sender: AnyObject) { // add action to the name
+        
+        let submitString = "\(book.author!) by \(book.author!) is trying to add itself"
+        let addBookalertVC = UIAlertController(title:nil, message: submitString, preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "Great, let's submit", style: .Default) { (action) -> Void in
+            let addBookDataStore = BookApiCall.sharedInstance
+            addBookDataStore.postAbook(self.book.dictionary) { (result) in
+                print("result = \(result) book added\(self.book.dictionary)")
+            }
+            self.dismissViewControllerAnimated(true, completion: nil);
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
+            self.submitButtonOutlet.setTitle("Submit again", forState: .Normal)
+        }
+        addBookalertVC.addAction(cancelAction)
+        addBookalertVC.addAction(okAction)
+        presentViewController(addBookalertVC, animated: true, completion: nil)
     }
     
-    @IBAction func BackButton(sender: AnyObject) {
+// MARK: Button Action
+    
+    @IBAction func BackButtonAction(sender: AnyObject) { // add action to the name
         self.dismissViewControllerAnimated(true, completion: nil); // make the animation slower
     }
-   
-    @IBAction func submitButton(sender: AnyObject) {
-    }
- 
+    
+    
     @IBAction func titleInput(sender: UITextField) {
         if (checkTextField(sender) == false) {
             alertViewActive()
         }
         print ("title check")
+        book.title = sender.text!
     }
+    
     @IBAction func authorInput(sender: UITextField) {
         if (checkTextField(sender) == false) {
             alertViewActive()
         }
         print ("author  check")
-        
+        book.author = sender.text!
     }
     
     @IBAction func catagrpyInput(sender: UITextField) {
@@ -64,65 +79,58 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
             alertViewActive()
         }
         print ("catagory  check")
+        book.categories = sender.text!
     }
+    
     @IBAction func publisher(sender: UITextField) {
         if (checkTextField(sender) == false) {
             alertViewActive()
         } // checkk number date?
         print ("publisher checker")
+        book.publisher = sender.text!
     }
     
+   // MARK: TextField related
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
         if (textField == addTitle){
-        addTitle.enabled = true
-            addTitle .becomeFirstResponder()
-            return true
-        }
-        if (textField == addAuthor) {
-            addAuthor.enabled = true
+        addAuthor.enabled = true
             addAuthor.becomeFirstResponder()
             return true
         }
-        if (textField == addPublisher) {
-            addPublisher.enabled = true
-            addPublisher.becomeFirstResponder()
-            return true
-        }
-        if (textField == addCatories){
+        if (textField == addAuthor) {
             addCatories.enabled = true
             addCatories.becomeFirstResponder()
             return true
         }
+        if (textField == addCatories) {
+            addPublisher.enabled = true
+            addPublisher.becomeFirstResponder()
+            return true
+        }
+        if (textField == addPublisher){
+            submitButtonOutlet.enabled = true
+            submitButtonOutlet.setTitle("submit", forState: .Normal)
+            print(book.dictionary)
+            return true
+        }
         return false
     }
-    
     
     func checkTextField(text: UITextField) -> Bool {
         
         if (text.text?.characters.count == 0) {
             return false
         }
-        
         return true
     }
-  
+ // MARK: TextFieldAlert
     func alertViewActive() {
-        
         let alertController = UIAlertController(title: "Yo, a book shall have a title?", message: "", preferredStyle: .Alert)
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-//            // ...
-//        }
-//        alertController.addAction(cancelAction)
-        
         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-            // ...
         }
         alertController.addAction(OKAction)
-        
         self.presentViewController(alertController, animated: true) {
-            // ...
         }
     }
- 
 }

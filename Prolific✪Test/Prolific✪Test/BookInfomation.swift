@@ -20,7 +20,7 @@ struct BookInfomation {
     var url : String?
     
     //var nameOfPerson: NSString
-    // NSString *newName = @"Jim";
+    // pass by reference / copy swift/objc c 
     var dictionary: [String : AnyObject]{
         get {
             return [
