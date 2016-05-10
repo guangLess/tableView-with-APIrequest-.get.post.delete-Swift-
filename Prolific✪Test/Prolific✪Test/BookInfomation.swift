@@ -24,8 +24,8 @@ struct BookInfomation {
     var dictionary: [String : AnyObject]{
         get {
             return [
-            "author" : author ?? "",
-            "categories": categories ?? "",
+            "author" : author ?? "This book has no Title.😜",
+            "categories": categories ?? "No Tag",
             "id":id ?? "",
             "lastCheckedOut":lastCheckedOut ?? "",
             "lastCheckedOutBy":lastCheckedOutBy ?? "",

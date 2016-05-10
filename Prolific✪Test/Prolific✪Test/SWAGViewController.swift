@@ -24,14 +24,14 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // bookDataStore.getBookData{_ in
-        bookDataStore.getBookData{_ in
-
-        dispatch_async(dispatch_get_main_queue(), {
-                print("block done to main Queue")
-                self.bookTableView.reloadData()
-            })
-        }
+//        bookDataStore.bookArray.removeAll()
+//        bookDataStore.getBookData{_ in
+//        dispatch_async(dispatch_get_main_queue(), {
+//                print("block done to main Queue")
+//                self.bookTableView.reloadData()
+//            })
+//        }
+        //refreshTableView()
         bookTableView.dataSource = self
         bookTableView.delegate = self
         testLabel.text = "This is a test!"
@@ -39,11 +39,26 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //bookTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
-//    func tableViewPostBookData() {
-//        bookDataStore.postABook { _ in
-//          self.bookTableView.reloadData()
-//        }
-//    }
+/*
+     - (void)viewWillAppear:(BOOL)animated {
+     [super viewWillAppear:animated];
+     [self.tableView reloadData]; // to reload selected cell
+     }
+ */
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshTableView()
+    }
+    
+    func refreshTableView () {
+        bookDataStore.bookArray.removeAll()
+        bookDataStore.getBookData{_ in
+            dispatch_async(dispatch_get_main_queue(), {
+                print("block done to main Queue")
+                self.bookTableView.reloadData()
+            })
+        }
+    }
     
     @IBAction func addBookAction(sender: AnyObject) {
 //        bookDataStore.postABook { _ in

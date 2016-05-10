@@ -22,7 +22,7 @@ class BookDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        authorLabel.text = "hello world"
+        //authorLabel.text = "hello world"
         // Do any additional setup after loading the view.
     }
     
@@ -32,24 +32,36 @@ class BookDetailViewController: UIViewController {
     }
     
     func updateUI() {
-        titleLabel.text = book.title ?? "No title"
-        authorLabel.text = book.author ?? "No author found"
+        titleLabel.text = book.title ?? "This book has no Title.😜"
+        titleLabel.sizeToFit()
+        authorLabel.text = book.author ?? "No Authoer😜"
+        authorLabel.sizeToFit()
+        categoryLabel.text = book.categories ?? "No Tag"
+        authorLabel.sizeToFit()
+        publisherLabel.text = book.publisher ?? "No Publisher 😜"
+        authorLabel.sizeToFit()
+
+        lastCheckedOutByLabel.text = book.lastCheckedOut ?? "No body checked it out yet, be the first one"
+        authorLabel.sizeToFit()
+
+        lastCheckedOutByLabel.text = book.lastCheckedOutBy ?? "No date"
         
-        if let bookTitle = book.title {
-            titleLabel.text = bookTitle
-        } else { titleLabel.text = "No title" }
-        if let bookAuthor = book.author {
-            authorLabel.text = bookAuthor
-        } else {authorLabel.text = "No Author found"}
-        if let lastCheckedOut = book.lastCheckedOut {
-            lastCheckedOutByLabel.text = lastCheckedOut
-        } else { lastCheckedOutByLabel.text = "No body checked it out Yet"}
-        if let publisher = book.publisher{
-            publisherLabel.text = publisher
-        } else { publisherLabel.text = "no recoard of publisher"}
-        if let category = book.categories{
-            categoryLabel.text = category
-        }else { categoryLabel.text = "no Category Tagged" }
+//        
+//        if let bookTitle = book.title {
+//            titleLabel.text = bookTitle
+//        } else { titleLabel.text = "No title😜" }
+//        if let bookAuthor = book.author {
+//            authorLabel.text = bookAuthor
+//        } else {authorLabel.text = "No Author found"}
+//        if let lastCheckedOut = book.lastCheckedOut {
+//            lastCheckedOutByLabel.text = lastCheckedOut
+//        } else { lastCheckedOutByLabel.text = "No body checked it out Yet"}
+//        if let publisher = book.publisher{
+//            publisherLabel.text = publisher
+//        } else { publisherLabel.text = "no recoard of publisher"}
+//        if let category = book.categories{
+//            categoryLabel.text = category
+//        }else { categoryLabel.text = "no Category Tagged" }
         
         let fullText = "Allo,This is book is published by \(book.publisher), last checkOut at \(book.lastCheckedOut), by this person \(book.lastCheckedOutBy). We think this place \(book.publisher) published it! Hope you enjoy it"
         print(fullText)

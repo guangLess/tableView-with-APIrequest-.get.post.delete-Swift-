@@ -17,7 +17,7 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var submitButtonOutlet: UIButton!
     
     var book = BookInfomation()
-    
+    // need to fix the layout 
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +36,7 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         
         let submitString = "\(book.author!) by \(book.author!) is trying to add itself"
         let addBookalertVC = UIAlertController(title:nil, message: submitString, preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "Great, let's submit", style: .Default) { (action) -> Void in
+        let okAction = UIAlertAction(title: "Great💥let's submit", style: .Default) { (action) -> Void in
             let addBookDataStore = BookApiCall.sharedInstance
             addBookDataStore.postAbook(self.book.dictionary) { (result) in
                 print("result = \(result) book added\(self.book.dictionary)")
@@ -44,7 +44,7 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
             self.dismissViewControllerAnimated(true, completion: nil);
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
-            self.submitButtonOutlet.setTitle("Submit again", forState: .Normal)
+            self.submitButtonOutlet.setTitle("Submit 📖 again", forState: .Normal)
         }
         addBookalertVC.addAction(cancelAction)
         addBookalertVC.addAction(okAction)
@@ -110,7 +110,7 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         }
         if (textField == addPublisher){
             submitButtonOutlet.enabled = true
-            submitButtonOutlet.setTitle("submit", forState: .Normal)
+            submitButtonOutlet.setTitle("📖 submit", forState: .Normal)
             print(book.dictionary)
             return true
         }
