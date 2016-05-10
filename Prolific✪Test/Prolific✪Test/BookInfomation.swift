@@ -24,14 +24,14 @@ struct BookInfomation {
     var dictionary: [String : AnyObject]{
         get {
             return [
-            "author" : author ?? "This book has no Title.😜",
+            "author" : author ?? "This book has no author.😜",
+            "title":title ?? "Na title😜",
             "categories": categories ?? "No Tag",
             "id":id ?? "",
-            "lastCheckedOut":lastCheckedOut ?? "",
-            "lastCheckedOutBy":lastCheckedOutBy ?? "",
-            "publisher":publisher ?? "",
-            "title":title ?? "",
-            "url":url ?? ""
+            "lastCheckedOut":lastCheckedOut ?? "No Person Checked it out yet 😜 be the first one!",
+            "lastCheckedOutBy":lastCheckedOutBy ?? "😜No date",
+            "publisher":publisher ?? "😜",
+            "url":url ?? "😜"
             ]
         }
     }

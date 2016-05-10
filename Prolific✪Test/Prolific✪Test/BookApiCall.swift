@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 
+// make URL static
 
 class BookApiCall {
     
@@ -69,7 +70,6 @@ class BookApiCall {
         }
     }
 
-    
     func deleteBook(input: Int, completion: (result: String) -> Void) { // change to bool
     print("bookId is = \(input)")
         
@@ -89,4 +89,27 @@ class BookApiCall {
     print("DELETE ok")
     }
   }
+    
+    
+    /*
+     Alamofire.request(.PUT, "http://httpbin.org/put", parameters: ["foo": "bar", "parm2": "hi"])
+     .response { (request, response, data, error) in
+     println(request)
+     println(response)
+     println(error)
+     }
+ */
+    
+    func editBook (input: Int, param : [String: String]) {
+        let url = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books"
+        
+        let bookIDURL = String(format:"%@/%@",url,String(input))
+        Alamofire.request(.PUT, bookIDURL, parameters: param)
+            .response { (request, response, data, error) in
+                //print(request)
+                print(response)
+                print(error)
+        }
+    }
+    
 }

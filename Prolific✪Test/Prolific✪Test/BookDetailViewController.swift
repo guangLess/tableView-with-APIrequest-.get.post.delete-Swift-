@@ -17,6 +17,7 @@ class BookDetailViewController: UIViewController {
     @IBOutlet weak var lastCheckedOutByLabel: UILabel!
     @IBOutlet weak var publisherLabel: UILabel!
    
+    let bookDataStore : BookApiCall = BookApiCall.sharedInstance
     var book = BookInfomation()
     
     override func viewDidLoad() {
@@ -30,50 +31,59 @@ class BookDetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+  // MARK : UI
     func updateUI() {
         titleLabel.text = book.title ?? "This book has no Title.😜"
-        titleLabel.sizeToFit()
-        authorLabel.text = book.author ?? "No Authoer😜"
-        authorLabel.sizeToFit()
-        categoryLabel.text = book.categories ?? "No Tag"
-        authorLabel.sizeToFit()
-        publisherLabel.text = book.publisher ?? "No Publisher 😜"
-        authorLabel.sizeToFit()
-
-        lastCheckedOutByLabel.text = book.lastCheckedOut ?? "No body checked it out yet, be the first one"
-        authorLabel.sizeToFit()
-
-        lastCheckedOutByLabel.text = book.lastCheckedOutBy ?? "No date"
+        //titleLabel.sizeToFit()
+        authorLabel.text = book.author ?? "No Author😜"
+        //authorLabel.sizeToFit()//➖💬🕛🕤✏︎✎
+        categoryLabel.text = String(format:"⎣Category: %@⎦", book.categories ?? "Not Categorized")
         
-//        
-//        if let bookTitle = book.title {
-//            titleLabel.text = bookTitle
-//        } else { titleLabel.text = "No title😜" }
-//        if let bookAuthor = book.author {
-//            authorLabel.text = bookAuthor
-//        } else {authorLabel.text = "No Author found"}
-//        if let lastCheckedOut = book.lastCheckedOut {
-//            lastCheckedOutByLabel.text = lastCheckedOut
-//        } else { lastCheckedOutByLabel.text = "No body checked it out Yet"}
-//        if let publisher = book.publisher{
-//            publisherLabel.text = publisher
-//        } else { publisherLabel.text = "no recoard of publisher"}
-//        if let category = book.categories{
-//            categoryLabel.text = category
-//        }else { categoryLabel.text = "no Category Tagged" }
-        
+        publisherLabel.text = String(format:"⎣Publisher: %@⎦", book.publisher ?? "No Publisher 😜")
+        lastCheckedOutLabel.text = String(format:"⎜Checked out: %@ ⎜", book.lastCheckedOut ?? "be the first one to take the book!")
+        lastCheckedOutByLabel.text = String(format:"⎜@ %@ ⎜", book.lastCheckedOutBy ?? "no time record")
+      
         let fullText = "Allo,This is book is published by \(book.publisher), last checkOut at \(book.lastCheckedOut), by this person \(book.lastCheckedOutBy). We think this place \(book.publisher) published it! Hope you enjoy it"
         print(fullText)
     }
- 
-    @IBAction func deleteButton(sender: AnyObject) {
-        let bookDataStore : BookApiCall = BookApiCall.sharedInstance
+ // MARK : delete Action
+    @IBAction func deleteButtonAction(sender: AnyObject) {
         
-        let bookId = book.id!
-        bookDataStore.deleteBook(bookId) { (result) in
-            // alertView
-            print("book deleted\(result)")
+        // alertView
+        let alertController = UIAlertController(title: "You are about to delete this book", message: "\(self.book.title!)", preferredStyle: .Alert)
+        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            let bookId = self.book.id!
+            self.bookDataStore.deleteBook(bookId) { (result) in
+                print("book deleted\(result)")
+            }
+            //self.dismissViewControllerAnimated(true, completion: nil);
+            self.navigationController?.popViewControllerAnimated(true)
         }
+        alertController.addAction(OKAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancle", style: .Default) {(action) in
+        }
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+
+        }
+    
+    // MARK: Check Out
+    
+    @IBAction func checkOutAction(sender: UIButton) {
+        
+        let todaysDate:NSDate = NSDate()
+        let dateFormatter:NSDateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyy-MM-dd HH:mm:ss zzz"
+        let dateInFormat:String = dateFormatter.stringFromDate(todaysDate)
+        print(dateInFormat)
+        //[[UIDevice currentDevice] name];
+        let deviceName = UIDevice.currentDevice().name
+        print(deviceName)
+  
+        let param = ["lastCheckedOut" : dateInFormat,
+                     "lastCheckedOutBy" : deviceName]
+        bookDataStore.editBook(self.book.id!, param: param)
     }
 }
