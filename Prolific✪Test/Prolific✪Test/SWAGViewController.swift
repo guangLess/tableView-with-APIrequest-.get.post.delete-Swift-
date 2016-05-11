@@ -13,8 +13,6 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var bookTableView: UITableView!
     @IBOutlet weak var testLabel: UILabel!
 
-    
-    //var bookArray = [bookInfomation]()
     let bookDataUrl = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books?" // make it static data
     let bookDataStore : BookApiCall = BookApiCall.sharedInstance
     
@@ -24,27 +22,11 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        bookDataStore.bookArray.removeAll()
-//        bookDataStore.getBookData{_ in
-//        dispatch_async(dispatch_get_main_queue(), {
-//                print("block done to main Queue")
-//                self.bookTableView.reloadData()
-//            })
-//        }
-        //refreshTableView()
         bookTableView.dataSource = self
         bookTableView.delegate = self
         testLabel.text = "This is a test!"
-        
-        //bookTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
-    
-/*
-     - (void)viewWillAppear:(BOOL)animated {
-     [super viewWillAppear:animated];
-     [self.tableView reloadData]; // to reload selected cell
-     }
- */
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         refreshTableView()
@@ -61,9 +43,7 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @IBAction func addBookAction(sender: AnyObject) {
-//        bookDataStore.postABook { _ in
-//            self.bookTableView.reloadData()
-//        }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,20 +57,16 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
-        //let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as! TableViewCell
-        
+   
         let bookCell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as! BookTableViewCell
         
-        //let bookCell:BookTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as BookTableViewCell
-      
         let eachBookCell = bookDataStore.bookArray[indexPath.row]
         print("author of the book \(eachBookCell.author) ---- title = \(eachBookCell.title)")
         //bookCell.textLabel?.text = eachBookCell.author
-
-        bookCell.authorLabel.text = eachBookCell.author
         bookCell.titleLabel.text = eachBookCell.title
-        
+        bookCell.titleLabel.sizeToFit()//✐
+        bookCell.authorLabel.text = String(format:" ✎ %@",eachBookCell.author ?? "We don't know who wrote this book")
+  
         return bookCell
     }
     
@@ -111,17 +87,12 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-       if let cell = sender as? BookTableViewCell {
+        if let cell = sender as? BookTableViewCell {
             let i = bookTableView.indexPathForCell(cell)!.row
             if segue.identifier == "segueToBook" {
                 let bookDetailVC = segue.destinationViewController as! BookDetailViewController
                 bookDetailVC.book = bookDataStore.bookArray[i]
             }
         }
-//    if segue.identifier == "addBook" {
-//        let addBookVC = segue.destinationViewController as! AddBookViewController
-//        addBookVC
-//        
-//    }
- }
+    }
 }
