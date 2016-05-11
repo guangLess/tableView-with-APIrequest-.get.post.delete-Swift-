@@ -19,8 +19,6 @@ struct BookInfomation {
     var title : String?
     var url : String?
     
-    //var nameOfPerson: NSString
-    // pass by reference / copy swift/objc c 
     var dictionary: [String : AnyObject]{
         get {
             return [

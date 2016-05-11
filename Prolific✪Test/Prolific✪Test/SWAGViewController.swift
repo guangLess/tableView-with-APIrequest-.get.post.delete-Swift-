@@ -59,31 +59,18 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
    
         let bookCell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as! BookTableViewCell
-        
         let eachBookCell = bookDataStore.bookArray[indexPath.row]
         print("author of the book \(eachBookCell.author) ---- title = \(eachBookCell.title)")
-        //bookCell.textLabel?.text = eachBookCell.author
         bookCell.titleLabel.text = eachBookCell.title
         bookCell.titleLabel.sizeToFit()//✐
         bookCell.authorLabel.text = String(format:" ✎ %@",eachBookCell.author ?? "We don't know who wrote this book")
-  
+        bookCell.authorLabel.sizeToFit()//✐
+
         return bookCell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("cell selected")
-        
-        /*
-         pageVC.imageObjects = self.hgImageDataStore.pictureArray
-         pageVC.tappedCellIndex = indexPath.row
-         
-         self.navigationController?.pushViewController(pageVC, animated: true)
-        */
-        
-        //let detailBook = BookDetailViewController()
-        //detailBook.book = bookDataStore.bookArray[indexPath.row]
-        //self.navigationController?.pushViewController(detailBook as! BookDetailViewController!, animated: true)
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {

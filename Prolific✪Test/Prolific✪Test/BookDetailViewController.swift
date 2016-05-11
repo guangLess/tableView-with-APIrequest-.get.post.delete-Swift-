@@ -34,7 +34,6 @@ class BookDetailViewController: UIViewController {
     func updateUI() {
         titleLabel.text = book.title ?? "This book has no Title.😜"
         authorLabel.text = book.author ?? "No Author😜"
-        //➖💬🕛🕤✏︎✎
         categoryLabel.text = String(format:"⎣Category: %@⎦", book.categories ?? "Not Categorized")
         publisherLabel.text = String(format:"⎣Publisher: %@⎦", book.publisher ?? "No Publisher 😜")
         lastCheckedOutLabel.text = String(format:"⎜Checked out: %@ ⎜", book.lastCheckedOut ?? "be the first one to take the book!")
@@ -83,7 +82,6 @@ class BookDetailViewController: UIViewController {
                 //Once the label is completely invisible, set the text and fade it back in
                 self.popUpView.hidden = false
                 self.popUpView.text = "You checked out \n ✎\(self.book.title!)"
-                
                 UIView.animateWithDuration(2.0, delay:0.3, options: UIViewAnimationOptions.CurveEaseIn, animations: {
                     self.popUpView.alpha = 1.0
                     }, completion: nil)
@@ -94,7 +92,6 @@ class BookDetailViewController: UIViewController {
                 })
         })
   }
-    
     @IBAction func goToWebAction(sender: AnyObject) {
         let xOcean = titleLabel.text ?? "cute dogs"
         let url : NSString = "http://www.google.com/search?q=\(xOcean)"

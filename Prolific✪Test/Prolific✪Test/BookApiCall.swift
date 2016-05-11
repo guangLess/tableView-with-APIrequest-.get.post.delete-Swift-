@@ -14,15 +14,14 @@ import Alamofire
 class BookApiCall {
     
     static let sharedInstance = BookApiCall()
-    
     var bookArray = [BookInfomation]()
     let bookDataUrl = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books?"
-
+    let editBookUrl = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books"
+    
     func getBookData(completion: ([[String: AnyObject]]) -> Void) {
         //let bookDataUrl = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books?"
         Alamofire.request(.GET, bookDataUrl).responseJSON {
             response in
-            
             guard response.result.error == nil
                 else {
                     print ("Error. \(response.result.error?.localizedDescription) and \(response.debugDescription)")
@@ -34,13 +33,11 @@ class BookApiCall {
                 //print("Response JSON: \(response.result.value)")
                 completion(response.result.value as! [[String: AnyObject]])
                 
-                //var i = 0
                 var bArray = [[String:AnyObject]]()
                 bArray = response.result.value as![[String:AnyObject]]
                 print("The bArray = \(bArray.last)")
                 
                 for eachBook in response.result.value as! [[String : AnyObject]] {
-                    //i+=1
                     let book = self.addPropertyToBook(eachBook)
                     self.bookArray.append(book)
                 }
@@ -48,7 +45,6 @@ class BookApiCall {
         }
     }
     
-    // can you populated the data model by the api call, instand like book : key .. value, not manuelly typed
     private func addPropertyToBook(book: [String : AnyObject]) -> BookInfomation {
         let book = BookInfomation(author: book["author"] as? String , categories: book["categories"] as? String, id:book["id"] as? Int, lastCheckedOut: book["lastCheckedOut"] as? String, lastCheckedOutBy: book["lastCheckedOutBy"] as? String, publisher: book["publisher"] as? String, title: book["title"] as? String, url:book["book.url"] as? String)
         return book
@@ -69,40 +65,28 @@ class BookApiCall {
                 }
         }
     }
-
+    
     func deleteBook(input: Int, completion: (result: String) -> Void) { // change to bool
-    print("bookId is = \(input)")
+        print("bookId is = \(input)")
         
-        //var aStr = String(format: "%@%x", "timeNow in hex: ", timeNow)
-    let url = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books"
-    let bookIDURL = String(format:"%@/%@",url,String(input))
-    print(bookIDURL)
+        let url = editBookUrl //"http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books"
+        let bookIDURL = String(format:"%@/%@",url,String(input))
+        print(bookIDURL)
         
-    Alamofire.request(.DELETE, bookIDURL)
-    .responseJSON { response in
-    guard response.result.error == nil else {
-    // got an error in getting the data, need to handle it
-    print("error\(response.result.error)")
-    return
+        Alamofire.request(.DELETE, bookIDURL)
+            .responseJSON { response in
+                guard response.result.error == nil else {
+                    // got an error in getting the data, need to handle it
+                    print("error\(response.result.error)")
+                    return
+                }
+                completion(result: "book deleted!")
+                print("DELETE ok")
+        }
     }
-    completion(result: "book deleted!")
-    print("DELETE ok")
-    }
-  }
-    
-    
-    /*
-     Alamofire.request(.PUT, "http://httpbin.org/put", parameters: ["foo": "bar", "parm2": "hi"])
-     .response { (request, response, data, error) in
-     println(request)
-     println(response)
-     println(error)
-     }
- */
     
     func editBook (input: Int, param : [String: String]) {
-        let url = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books"
-        
+        let url = editBookUrl //"http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books"
         let bookIDURL = String(format:"%@/%@",url,String(input))
         Alamofire.request(.PUT, bookIDURL, parameters: param)
             .response { (request, response, data, error) in
@@ -111,5 +95,4 @@ class BookApiCall {
                 print(error)
         }
     }
-    
 }
