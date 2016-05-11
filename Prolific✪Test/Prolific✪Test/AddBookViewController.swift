@@ -31,16 +31,18 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-// MARK : Submit method
-    @IBAction func submitButtonAction(sender: AnyObject) { // add action to the name
+  // MARK : Submit    
+    @IBAction func submitButtonAction(sender: AnyObject) {
         
-        let submitString = "\(book.author!) by \(book.author!) is trying to add itself"
+        let submitString = "\(book.title) by \(book.author) is trying to add itself"
         let addBookalertVC = UIAlertController(title:nil, message: submitString, preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "Great💥let's submit", style: .Default) { (action) -> Void in
             let addBookDataStore = BookApiCall.sharedInstance
+            //dispatch_async(dispatch_get_main_queue(), {
             addBookDataStore.postAbook(self.book.dictionary) { (result) in
                 print("result = \(result) book added\(self.book.dictionary)")
             }
+            //})
             self.dismissViewControllerAnimated(true, completion: nil);
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
@@ -51,13 +53,11 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         presentViewController(addBookalertVC, animated: true, completion: nil)
     }
     
-// MARK: Button Action
+    // MARK: Button Action
     
     @IBAction func BackButtonAction(sender: AnyObject) { // add action to the name
         self.dismissViewControllerAnimated(true, completion: nil); // make the animation slower
     }
-    
-    
     @IBAction func titleInput(sender: UITextField) {
         if (checkTextField(sender) == false) {
             alertViewActive()
@@ -65,7 +65,6 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         print ("title check")
         book.title = sender.text!
     }
-    
     @IBAction func authorInput(sender: UITextField) {
         if (checkTextField(sender) == false) {
             alertViewActive()
@@ -73,7 +72,6 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         print ("author  check")
         book.author = sender.text!
     }
-    
     @IBAction func catagrpyInput(sender: UITextField) {
         if (checkTextField(sender) == false) {
             alertViewActive()
@@ -81,7 +79,6 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         print ("catagory  check")
         book.categories = sender.text!
     }
-    
     @IBAction func publisher(sender: UITextField) {
         if (checkTextField(sender) == false) {
             alertViewActive()

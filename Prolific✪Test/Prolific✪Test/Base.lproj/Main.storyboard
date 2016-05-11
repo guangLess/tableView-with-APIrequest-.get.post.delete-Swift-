@@ -321,73 +321,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l7j-VP-foX">
-                                <rect key="frame" x="20" y="37" width="100" height="88"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="9YL-4L-lbV"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="49"/>
-                                <state key="normal" title="◀︎🏃🏻">
-                                    <color key="titleColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="BackButtonAction:" destination="LOa-58-Q7B" eventType="touchUpInside" id="R1a-et-WAA"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" borderStyle="line" placeholder="add 📖 title" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="d2A-kc-Qcg">
-                                <rect key="frame" x="45" y="153" width="522" height="70"/>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="MOx-hL-zMr"/>
-                                </constraints>
-                                <attributedString key="attributedText"/>
-                                <textInputTraits key="textInputTraits" spellCheckingType="yes" keyboardAppearance="alert" returnKeyType="done"/>
-                                <connections>
-                                    <action selector="titleInput:" destination="LOa-58-Q7B" eventType="editingDidEnd" id="556-d4-91i"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" borderStyle="line" placeholder="add 📖 author" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="HXM-xS-3ia">
-                                <rect key="frame" x="45" y="227" width="522" height="71"/>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="71" id="xtk-Ub-sD2"/>
-                                </constraints>
-                                <attributedString key="attributedText"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="authorInput:" destination="LOa-58-Q7B" eventType="editingDidEnd" id="pEs-7V-TtS"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" borderStyle="line" placeholder="add catagrogy" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="HoY-G5-L4H">
-                                <rect key="frame" x="45" y="303" width="522" height="68"/>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="68" id="LV0-uh-W8j"/>
-                                </constraints>
-                                <attributedString key="attributedText"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="catagrpyInput:" destination="LOa-58-Q7B" eventType="editingDidEnd" id="c1o-7Q-3Kc"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" borderStyle="line" placeholder="add publisher" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="Gmc-Ug-hVD">
-                                <rect key="frame" x="45" y="378" width="522" height="79"/>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="79" id="D4C-sc-SKc"/>
-                                </constraints>
-                                <attributedString key="attributedText"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="publisher:" destination="LOa-58-Q7B" eventType="editingDidEnd" id="gWC-il-dNY"/>
-                                </connections>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RR5-gF-mRn">
-                                <rect key="frame" x="0.0" y="472" width="600" height="128"/>
+                                <rect key="frame" x="0.0" y="485" width="600" height="115"/>
                                 <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="7bO-eY-0Fu"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="7bO-eY-0Fu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="26"/>
                                 <state key="normal">
@@ -397,28 +335,90 @@
                                     <action selector="submitButtonAction:" destination="LOa-58-Q7B" eventType="touchUpInside" id="RAX-5p-XQm"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="gWx-zY-jaU">
+                                <rect key="frame" x="45" y="161" width="510" height="264"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" borderStyle="line" placeholder="add 📖 title" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="d2A-kc-Qcg">
+                                        <rect key="frame" x="0.0" y="0.0" width="510" height="64"/>
+                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <attributedString key="attributedText"/>
+                                        <textInputTraits key="textInputTraits" spellCheckingType="yes" keyboardAppearance="alert" returnKeyType="done"/>
+                                        <connections>
+                                            <action selector="titleInput:" destination="LOa-58-Q7B" eventType="editingDidEnd" id="556-d4-91i"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" borderStyle="line" placeholder="add 📖 author" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="HXM-xS-3ia">
+                                        <rect key="frame" x="0.0" y="67" width="510" height="63.5"/>
+                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <attributedString key="attributedText"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="authorInput:" destination="LOa-58-Q7B" eventType="editingDidEnd" id="pEs-7V-TtS"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" borderStyle="line" placeholder="add catagrogy" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="HoY-G5-L4H">
+                                        <rect key="frame" x="0.0" y="133.5" width="510" height="64"/>
+                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <attributedString key="attributedText"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="catagrpyInput:" destination="LOa-58-Q7B" eventType="editingDidEnd" id="c1o-7Q-3Kc"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" borderStyle="line" placeholder="add publisher" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="Gmc-Ug-hVD">
+                                        <rect key="frame" x="0.0" y="200.5" width="510" height="63.5"/>
+                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <attributedString key="attributedText"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="publisher:" destination="LOa-58-Q7B" eventType="editingDidEnd" id="gWC-il-dNY"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l7j-VP-foX">
+                                <rect key="frame" x="20" y="42" width="80" height="59"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="9YL-4L-lbV"/>
+                                    <constraint firstAttribute="height" constant="70" id="QMH-m7-uQw"/>
+                                    <constraint firstAttribute="width" constant="80" id="moA-h1-5KA"/>
+                                    <constraint firstAttribute="height" constant="59" id="pDM-5x-4yG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <state key="normal" title="◀︎🏃🏻">
+                                    <color key="titleColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="9YL-4L-lbV"/>
+                                        <exclude reference="QMH-m7-uQw"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="BackButtonAction:" destination="LOa-58-Q7B" eventType="touchUpInside" id="R1a-et-WAA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="d2A-kc-Qcg" firstAttribute="top" secondItem="l7j-VP-foX" secondAttribute="bottom" constant="28" id="0af-Qr-dja"/>
                             <constraint firstItem="RR5-gF-mRn" firstAttribute="bottom" secondItem="2pl-gy-P6t" secondAttribute="top" id="57H-JR-FNh"/>
-                            <constraint firstItem="l7j-VP-foX" firstAttribute="leading" secondItem="gMg-zf-CmI" secondAttribute="leadingMargin" constant="22" id="8ue-Bf-GSW"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="d2A-kc-Qcg" secondAttribute="trailing" constant="13" id="A4K-1g-Ne2"/>
-                            <constraint firstItem="RR5-gF-mRn" firstAttribute="top" secondItem="Gmc-Ug-hVD" secondAttribute="bottom" constant="16" id="A8f-RI-zOt"/>
-                            <constraint firstItem="HXM-xS-3ia" firstAttribute="leading" secondItem="HoY-G5-L4H" secondAttribute="leading" id="EWN-Xb-Qh0"/>
-                            <constraint firstItem="Gmc-Ug-hVD" firstAttribute="top" secondItem="HoY-G5-L4H" secondAttribute="bottom" constant="8" symbolic="YES" id="HKa-Bv-adX"/>
-                            <constraint firstItem="HoY-G5-L4H" firstAttribute="top" secondItem="HXM-xS-3ia" secondAttribute="bottom" constant="4" id="Nxx-ew-9p1"/>
-                            <constraint firstItem="d2A-kc-Qcg" firstAttribute="leading" secondItem="gMg-zf-CmI" secondAttribute="leadingMargin" constant="25" id="Ql5-FH-2L4"/>
-                            <constraint firstItem="l7j-VP-foX" firstAttribute="top" secondItem="qRn-9M-HH7" secondAttribute="bottom" constant="17" id="XLx-ZN-XhQ"/>
-                            <constraint firstItem="d2A-kc-Qcg" firstAttribute="leading" secondItem="HXM-xS-3ia" secondAttribute="leading" id="ZGm-5f-IxM"/>
-                            <constraint firstAttribute="trailing" secondItem="RR5-gF-mRn" secondAttribute="trailing" id="drC-dQ-X8K"/>
-                            <constraint firstItem="HoY-G5-L4H" firstAttribute="trailing" secondItem="Gmc-Ug-hVD" secondAttribute="trailing" id="eOR-He-gWo"/>
-                            <constraint firstItem="d2A-kc-Qcg" firstAttribute="trailing" secondItem="HXM-xS-3ia" secondAttribute="trailing" id="pBs-Fv-mn0"/>
+                            <constraint firstItem="gWx-zY-jaU" firstAttribute="top" secondItem="l7j-VP-foX" secondAttribute="bottom" constant="60" id="Dbx-yz-Ysq"/>
+                            <constraint firstItem="RR5-gF-mRn" firstAttribute="top" secondItem="gWx-zY-jaU" secondAttribute="bottom" constant="60" id="EWe-Ez-dQ8"/>
+                            <constraint firstItem="gWx-zY-jaU" firstAttribute="height" secondItem="gMg-zf-CmI" secondAttribute="height" multiplier="0.44" id="G7y-lv-uf8"/>
+                            <constraint firstItem="gWx-zY-jaU" firstAttribute="leading" secondItem="gMg-zf-CmI" secondAttribute="leadingMargin" constant="25" id="Zpd-ua-40z"/>
+                            <constraint firstItem="l7j-VP-foX" firstAttribute="leading" secondItem="gMg-zf-CmI" secondAttribute="leadingMargin" id="dD2-dI-uKR"/>
+                            <constraint firstItem="RR5-gF-mRn" firstAttribute="trailing" secondItem="gMg-zf-CmI" secondAttribute="trailing" id="drC-dQ-X8K"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gWx-zY-jaU" secondAttribute="trailing" constant="25" id="frB-I9-8eW"/>
+                            <constraint firstItem="RR5-gF-mRn" firstAttribute="top" secondItem="gWx-zY-jaU" secondAttribute="bottom" constant="60" id="kJw-FR-VQh"/>
+                            <constraint firstItem="l7j-VP-foX" firstAttribute="top" secondItem="qRn-9M-HH7" secondAttribute="bottom" constant="22" id="nsI-PG-L0x"/>
                             <constraint firstItem="RR5-gF-mRn" firstAttribute="leading" secondItem="gMg-zf-CmI" secondAttribute="leading" id="pTA-vu-YDU"/>
-                            <constraint firstItem="HoY-G5-L4H" firstAttribute="leading" secondItem="Gmc-Ug-hVD" secondAttribute="leading" id="qd7-hx-3Qy"/>
-                            <constraint firstItem="HXM-xS-3ia" firstAttribute="trailing" secondItem="HoY-G5-L4H" secondAttribute="trailing" id="teU-YT-Ihi"/>
-                            <constraint firstItem="HXM-xS-3ia" firstAttribute="top" secondItem="d2A-kc-Qcg" secondAttribute="bottom" constant="3" id="xLU-tJ-qc1"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="kJw-FR-VQh"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="addAuthor" destination="HXM-xS-3ia" id="cv1-6s-8ge"/>

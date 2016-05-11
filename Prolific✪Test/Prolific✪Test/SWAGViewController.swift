@@ -36,7 +36,6 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
         bookDataStore.bookArray.removeAll()
         bookDataStore.getBookData{_ in
             dispatch_async(dispatch_get_main_queue(), {
-                print("block done to main Queue")
                 self.bookTableView.reloadData()
             })
         }

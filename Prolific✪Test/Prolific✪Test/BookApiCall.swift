@@ -20,6 +20,7 @@ class BookApiCall {
     
     func getBookData(completion: ([[String: AnyObject]]) -> Void) {
         //let bookDataUrl = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books?"
+        bookArray.removeAll()
         Alamofire.request(.GET, bookDataUrl).responseJSON {
             response in
             guard response.result.error == nil
