@@ -288,7 +288,7 @@
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="🤓" id="2cW-Oq-mZu">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="😎" style="done" id="03K-OK-O6W">
+                        <barButtonItem key="rightBarButtonItem" title="😎" style="done" id="03K-OK-O6W">
                             <color key="tintColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="goToWebAction:" destination="1Ui-PJ-4oR" id="HbF-GV-0g7"/>

@@ -96,38 +96,11 @@ class BookDetailViewController: UIViewController {
   }
     
     @IBAction func goToWebAction(sender: AnyObject) {
-        /*
-         NSString *chromeScheme = nil;
-         if ([scheme isEqualToString:@"http"]) {
-         chromeScheme = @"googlechrome";
-         } else if ([scheme isEqualToString:@"https"]) {
-         chromeScheme = @"googlechromes";
-         }
-         
-         // Proceed only if a valid Google Chrome URI Scheme is available.
-         if (chromeScheme) {
-         NSString *absoluteString = [inputURL absoluteString];
-         NSRange rangeForScheme = [absoluteString rangeOfString:@":"];
-         NSString *urlNoScheme =
-         [absoluteString substringFromIndex:rangeForScheme.location];
-         NSString *chromeURLString =
-         [chromeScheme stringByAppendingString:urlNoScheme];
-         NSURL *chromeURL = [NSURL URLWithString:chromeURLString];
-         
-         // Open the URL with Chrome.
-         [[UIApplication sharedApplication] openURL:chromeURL];
-         */
-    }
-    
-    
-   let url = NSURL(string: "https://www.hackingwithswift.com") {
-        UIApplication.sharedApplication().openURL(url)
-    }
-    
-    
-    UIApplication.sharedApplication().openURL(NSURL(string: "http://www.stackoverflow.com")!)
-
-    
-    
-    
+        let xOcean = titleLabel.text ?? "cute dogs"
+        let url : NSString = "http://www.google.com/search?q=\(xOcean)"
+        let urlStr = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        let searchURL : NSURL = NSURL(string: urlStr as String)!
+        let urlToapp = UIApplication.sharedApplication()
+        urlToapp.openURL(searchURL)
+   }
 }
