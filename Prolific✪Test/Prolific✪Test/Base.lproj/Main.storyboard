@@ -7,24 +7,6 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--Add Book View Controller-->
-        <scene sceneID="uWr-uw-INv">
-            <objects>
-                <viewController id="eMy-F1-faM" customClass="AddBookViewController" customModule="Prolific_Test" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Qeb-OB-M8h"/>
-                        <viewControllerLayoutGuide type="bottom" id="FkE-Gl-5ed"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="mSR-dP-YC7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yTD-po-vAm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2051" y="-601"/>
-        </scene>
         <!--📖-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -113,7 +95,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="📖" id="TWK-Z2-2bU">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="6fZ-gs-PLY">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="6fZ-gs-PLY">
                             <connections>
                                 <action selector="addBookAction:" destination="BYZ-38-t0r" id="9AL-Bt-Jdy"/>
                                 <segue destination="LOa-58-Q7B" kind="showDetail" id="6Xm-1j-ozg"/>
@@ -161,8 +143,8 @@
                                     <constraint firstAttribute="height" constant="43" id="9BX-BH-oHA"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" alignment="top" spacing="-1" translatesAutoresizingMaskIntoConstraints="NO" id="UdS-K0-abu">
-                                <rect key="frame" x="38" y="180" width="532" height="90"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="-1" translatesAutoresizingMaskIntoConstraints="NO" id="UdS-K0-abu">
+                                <rect key="frame" x="38" y="189" width="532" height="90"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="categories" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqQ-UK-V0R">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="24"/>
@@ -200,7 +182,7 @@
                                 </variation>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r1q-j9-mee">
-                                <rect key="frame" x="30" y="330.5" width="295" height="192"/>
+                                <rect key="frame" x="30" y="330" width="295" height="192"/>
                                 <color key="backgroundColor" red="0.14698546568805224" green="0.31050741792929293" blue="0.29290520185853886" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                 <state key="normal" title="Check out">
@@ -211,7 +193,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6HF-MZ-kGg" userLabel="delete/edit">
-                                <rect key="frame" x="324" y="331" width="246" height="192"/>
+                                <rect key="frame" x="324" y="330" width="246" height="192"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0W1-H6-SEW">
                                         <rect key="frame" x="0.0" y="0.0" width="246" height="96"/>
@@ -238,7 +220,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ag9-1Q-xbr" userLabel="LINE">
-                                <rect key="frame" x="30" y="299.5" width="540" height="1"/>
+                                <rect key="frame" x="30" y="299" width="540" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="OkS-f5-Iwv"/>
@@ -248,7 +230,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="popUpView" textAlignment="center" lineBreakMode="headTruncation" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gcm-o3-TNk">
-                                <rect key="frame" x="0.0" y="315.5" width="600" height="284.5"/>
+                                <rect key="frame" x="0.0" y="315" width="600" height="284.5"/>
                                 <color key="backgroundColor" red="1" green="0.99400529449999997" blue="0.45113310880000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>

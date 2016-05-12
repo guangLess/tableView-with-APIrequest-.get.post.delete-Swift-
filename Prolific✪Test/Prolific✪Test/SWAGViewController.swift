@@ -12,7 +12,6 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var bookTableView: UITableView!
     @IBOutlet weak var testLabel: UILabel!
 
-    //let bookDataUrl = APIKeys.getApi
     let bookDataStore : BookApiCall = BookApiCall.sharedInstance
     
     private struct Storyboard {
