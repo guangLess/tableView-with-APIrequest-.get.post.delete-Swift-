@@ -34,7 +34,7 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
   // MARK : Submit    
     @IBAction func submitButtonAction(sender: AnyObject) {
         
-        let submitString = "\(book.title) by \(book.author) is trying to add itself"
+        let submitString = "\(book.title!) by \(book.author!) is trying to add itself"
         let addBookalertVC = UIAlertController(title:nil, message: submitString, preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "Great💥let's submit", style: .Default) { (action) -> Void in
             let addBookDataStore = BookApiCall.sharedInstance

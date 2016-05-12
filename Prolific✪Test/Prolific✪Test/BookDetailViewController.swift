@@ -18,6 +18,7 @@ class BookDetailViewController: UIViewController {
     @IBOutlet weak var publisherLabel: UILabel!
     @IBOutlet weak var popUpView: UILabel!
    
+    @IBOutlet weak var lineDivider: UILabel!
     let bookDataStore : BookApiCall = BookApiCall.sharedInstance
     var book = BookInfomation()
     
@@ -30,21 +31,42 @@ class BookDetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-  // MARK : UI
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.currentDevice().orientation.isLandscape.boolValue {
+            print("Landscape")
+            lineDivider.hidden = true
+        } else {
+            lineDivider.hidden = false
+            print("Portrait")
+        }
+    }
+    
+    // MARK: UI
     func updateUI() {
         titleLabel.text = book.title ?? "This book has no Title.😜"
+        titleLabel.sizeToFit()
         authorLabel.text = book.author ?? "No Author😜"
+        authorLabel.sizeToFit()
         categoryLabel.text = String(format:"⎣Category: %@⎦", book.categories ?? "Not Categorized")
         publisherLabel.text = String(format:"⎣Publisher: %@⎦", book.publisher ?? "No Publisher 😜")
+        publisherLabel.sizeToFit()
         lastCheckedOutLabel.text = String(format:"⎜Checked out: %@ ⎜", book.lastCheckedOut ?? "be the first one to take the book!")
         lastCheckedOutByLabel.text = String(format:"⎜@ %@ ⎜", book.lastCheckedOutBy ?? "no time record")
         
         self.popUpView.alpha = 0
-
+        
+        let deviceOrientation = UIDevice.currentDevice().orientation
+        if deviceOrientation.isLandscape { lineDivider.hidden = true } else {
+            lineDivider.hidden = false
+        }
+/*
         let fullText = "Allo,This is book is published by \(book.publisher), last checkOut at \(book.lastCheckedOut), by this person \(book.lastCheckedOutBy). We think this place \(book.publisher) published it! Hope you enjoy it"
         print(fullText)
+ */
     }
- // MARK : delete Action
+    
+     // MARK: delete Action
     @IBAction func deleteButtonAction(sender: AnyObject) {
         
         let alertController = UIAlertController(title: "You are about to delete this book", message: "\(self.book.title!)", preferredStyle: .Alert)
