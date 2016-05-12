@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 class BookDetailViewController: UIViewController {
     
@@ -122,4 +123,16 @@ class BookDetailViewController: UIViewController {
         let urlToapp = UIApplication.sharedApplication()
         urlToapp.openURL(searchURL)
    }
+    
+    @IBAction func shareButtonAction(sender: UIButton) {
+        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter){
+            var twitterActionSheet: SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            twitterActionSheet.setInitialText("I checked out\(titleLabel.text)")
+            self.presentViewController(twitterActionSheet, animated: true, completion: nil)
+        } else {
+            var alert = UIAlertController(title: "", message: "You are not loged in on Twitter", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }   
 }

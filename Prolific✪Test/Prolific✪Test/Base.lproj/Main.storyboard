@@ -220,6 +220,9 @@
                                         <state key="normal" title="Share🤓">
                                             <color key="titleColor" red="0.14951217389999999" green="0.525390625" blue="0.2195557588" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="shareButtonAction:" destination="1Ui-PJ-4oR" eventType="touchUpInside" id="kIo-Mh-9zy"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvp-DL-4Ff">
                                         <rect key="frame" x="0.0" y="96" width="246" height="96"/>

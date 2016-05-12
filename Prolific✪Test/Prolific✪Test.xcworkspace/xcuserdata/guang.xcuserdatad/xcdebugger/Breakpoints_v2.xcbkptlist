@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Prolific&#x272a;Test/BookDetailViewController.swift"
-            timestampString = "484759051.408425"
+            timestampString = "484762289.665041"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "updateUI()"
             landmarkType = "5">
          </BreakpointContent>
