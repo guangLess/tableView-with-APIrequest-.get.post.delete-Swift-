@@ -9,19 +9,15 @@
 import Foundation
 import Alamofire
 
-// make URL static
-
 class BookApiCall {
     
     static let sharedInstance = BookApiCall()
     var bookArray = [BookInfomation]()
-    let bookDataUrl = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books?"
-    let editBookUrl = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books"
-    
+    private let swagApi = APIKeys()
+
     func getBookData(completion: ([[String: AnyObject]]) -> Void) {
-        //let bookDataUrl = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books?"
         bookArray.removeAll()
-        Alamofire.request(.GET, bookDataUrl).responseJSON {
+        Alamofire.request(.GET, swagApi.getApi).responseJSON {
             response in
             guard response.result.error == nil
                 else {
@@ -31,9 +27,8 @@ class BookApiCall {
             print("Response.result.isSuccess: \(response.result.isSuccess)")
             
             if response.result.isSuccess {
-                //print("Response JSON: \(response.result.value)")
+
                 completion(response.result.value as! [[String: AnyObject]])
-                
                 var bArray = [[String:AnyObject]]()
                 bArray = response.result.value as![[String:AnyObject]]
                 print("The bArray = \(bArray.last)")
@@ -53,7 +48,7 @@ class BookApiCall {
     
     func postAbook(bookInfo:[String:AnyObject], completion: (result: Bool) -> Void) {
         let postedBookDictionary = bookInfo
-        Alamofire.request(.POST, bookDataUrl, parameters: postedBookDictionary, encoding: .JSON)
+        Alamofire.request(.POST, swagApi.postApi, parameters: postedBookDictionary, encoding: .JSON)
             .validate()
             .responseJSON { response in
                 switch response.result {
@@ -70,7 +65,7 @@ class BookApiCall {
     func deleteBook(input: Int, completion: (result: String) -> Void) { // change to bool
         print("bookId is = \(input)")
         
-        let url = editBookUrl //"http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books"
+        let url = swagApi.postApi
         let bookIDURL = String(format:"%@/%@",url,String(input))
         print(bookIDURL)
         
@@ -87,7 +82,7 @@ class BookApiCall {
     }
     
     func editBook (input: Int, param : [String: String]) {
-        let url = editBookUrl //"http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books"
+        let url = swagApi.postApi
         let bookIDURL = String(format:"%@/%@",url,String(input))
         Alamofire.request(.PUT, bookIDURL, parameters: param)
             .response { (request, response, data, error) in

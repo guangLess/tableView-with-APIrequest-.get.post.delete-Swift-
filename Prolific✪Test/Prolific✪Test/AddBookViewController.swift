@@ -9,7 +9,6 @@
 import UIKit
 
 class AddBookViewController: UIViewController, UITextFieldDelegate {
-
     @IBOutlet weak var addTitle: UITextField!
     @IBOutlet weak var addAuthor: UITextField!
     @IBOutlet weak var addCatories: UITextField!
@@ -17,7 +16,7 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var submitButtonOutlet: UIButton!
     
     var book = BookInfomation()
-    // need to fix the layout 
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,7 +53,6 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: Button Action
-    
     @IBAction func BackButtonAction(sender: AnyObject) { // add action to the name
         self.dismissViewControllerAnimated(true, completion: nil); // make the animation slower
     }

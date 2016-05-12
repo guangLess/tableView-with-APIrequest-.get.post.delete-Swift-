@@ -9,11 +9,10 @@
 import UIKit
 
 class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
     @IBOutlet weak var bookTableView: UITableView!
     @IBOutlet weak var testLabel: UILabel!
 
-    let bookDataUrl = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books?" // make it static data
+    //let bookDataUrl = APIKeys.getApi
     let bookDataStore : BookApiCall = BookApiCall.sharedInstance
     
     private struct Storyboard {

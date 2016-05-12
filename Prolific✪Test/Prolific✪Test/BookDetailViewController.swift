@@ -63,7 +63,6 @@ class BookDetailViewController: UIViewController {
         }
 /*
         let fullText = "Allo,This is book is published by \(book.publisher), last checkOut at \(book.lastCheckedOut), by this person \(book.lastCheckedOutBy). We think this place \(book.publisher) published it! Hope you enjoy it"
-        print(fullText)
  */
     }
     
@@ -126,13 +125,13 @@ class BookDetailViewController: UIViewController {
     
     @IBAction func shareButtonAction(sender: UIButton) {
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter){
-            var twitterActionSheet: SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            let twitterActionSheet: SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
             twitterActionSheet.setInitialText("I checked out\(titleLabel.text)")
             self.presentViewController(twitterActionSheet, animated: true, completion: nil)
         } else {
-            var alert = UIAlertController(title: "", message: "You are not loged in on Twitter", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "", message: "You are not loged in on Twitter", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
-    }   
+    }
 }
