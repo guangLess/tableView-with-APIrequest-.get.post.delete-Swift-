@@ -4,7 +4,11 @@
 //
 //  Created by Guang on 4/29/16.
 //  Copyright © 2016 Guang. All rights reserved.
-//
+
+// TODO: size classes
+// FIXME: change guard, optional handeling, add pravite
+
+
 
 import UIKit
 
