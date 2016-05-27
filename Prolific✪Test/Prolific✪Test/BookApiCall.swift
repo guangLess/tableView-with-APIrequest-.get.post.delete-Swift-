@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-class BookApiCall {
+internal final class BookApiCall {
     
     static let sharedInstance = BookApiCall()
     var bookArray = [BookInfomation]()
@@ -27,12 +27,7 @@ class BookApiCall {
             print("Response.result.isSuccess: \(response.result.isSuccess)")
             
             if response.result.isSuccess {
-
                 completion(response.result.value as! [[String: AnyObject]])
-                var bArray = [[String:AnyObject]]()
-                bArray = response.result.value as![[String:AnyObject]]
-                print("The bArray = \(bArray.last)")
-                
                 for eachBook in response.result.value as! [[String : AnyObject]] {
                     let book = self.addPropertyToBook(eachBook)
                     self.bookArray.append(book)
@@ -52,32 +47,31 @@ class BookApiCall {
             .validate()
             .responseJSON { response in
                 switch response.result {
-                case .Success :
+                case .Success:
                     completion(result: true)
                     break
-                case .Failure :
+                case .Failure:
                     print(ErrorType)
                     break
                 }
         }
     }
     
-    func deleteBook(input: Int, completion: (result: String) -> Void) { // change to bool
+    func deleteBook(input: Int, completion: (result: String) -> Void) {
         print("bookId is = \(input)")
-        
         let url = swagApi.postApi
         let bookIDURL = String(format:"%@/%@",url,String(input))
-        print(bookIDURL)
         
         Alamofire.request(.DELETE, bookIDURL)
-            .responseJSON { response in
+            .responseJSON {
+                response in
                 guard response.result.error == nil else {
                     // got an error in getting the data, need to handle it
                     print("error\(response.result.error)")
                     return
                 }
                 completion(result: "book deleted!")
-                print("DELETE ok")
+                //print("DELETE ok")
         }
     }
     

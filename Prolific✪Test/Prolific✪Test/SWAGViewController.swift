@@ -6,17 +6,15 @@
 //  Copyright © 2016 Guang. All rights reserved.
 
 // TODO: size classes
-// FIXME: change guard, optional handeling, add pravite
-
-
+// FIXME: change guard, optional handeling, add pravite, one line for one function. no extra space in functions. Lessforce wrap. spaces after : take out. internal final class
 
 import UIKit
 
-class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+internal final class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var bookTableView: UITableView!
     @IBOutlet weak var testLabel: UILabel!
 
-    let bookDataStore : BookApiCall = BookApiCall.sharedInstance
+    let bookDataStore: BookApiCall = BookApiCall.sharedInstance
     
     private struct Storyboard {
         static let CellReuseIdentifier = "cell"
@@ -34,7 +32,7 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
         refreshTableView()
     }
     
-    func refreshTableView () {
+    private func refreshTableView() {
         bookDataStore.bookArray.removeAll()
         bookDataStore.getBookData{_ in
             dispatch_async(dispatch_get_main_queue(), {
@@ -44,7 +42,6 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @IBAction func addBookAction(sender: AnyObject) {
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,7 +67,7 @@ class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return bookCell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    private func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("cell selected")
     }
     

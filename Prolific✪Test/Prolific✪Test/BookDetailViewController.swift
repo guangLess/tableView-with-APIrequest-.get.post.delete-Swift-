@@ -9,7 +9,7 @@
 import UIKit
 import Social
 
-class BookDetailViewController: UIViewController {
+internal final class BookDetailViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
@@ -18,10 +18,10 @@ class BookDetailViewController: UIViewController {
     @IBOutlet weak var lastCheckedOutByLabel: UILabel!
     @IBOutlet weak var publisherLabel: UILabel!
     @IBOutlet weak var popUpView: UILabel!
-   
     @IBOutlet weak var lineDivider: UILabel!
-    let bookDataStore : BookApiCall = BookApiCall.sharedInstance
-    var book = BookInfomation()
+
+    private let bookDataStore : BookApiCall = BookApiCall.sharedInstance
+    public var book = BookInfomation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,6 @@ class BookDetailViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -43,7 +42,7 @@ class BookDetailViewController: UIViewController {
         }
     }
     
-    // MARK: UI
+// MARK: UI
     func updateUI() {
         titleLabel.text = book.title ?? "This book has no Title.😜"
         titleLabel.sizeToFit()
@@ -58,7 +57,9 @@ class BookDetailViewController: UIViewController {
         self.popUpView.alpha = 0
         
         let deviceOrientation = UIDevice.currentDevice().orientation
-        if deviceOrientation.isLandscape { lineDivider.hidden = true } else {
+        if deviceOrientation.isLandscape {
+            lineDivider.hidden = true
+        } else {
             lineDivider.hidden = false
         }
 /*
@@ -68,12 +69,14 @@ class BookDetailViewController: UIViewController {
     
      // MARK: delete Action
     @IBAction func deleteButtonAction(sender: AnyObject) {
-        
         let alertController = UIAlertController(title: "You are about to delete this book", message: "\(self.book.title!)", preferredStyle: .Alert)
-        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-            let bookId = self.book.id!
+        // TODO: (action)?
+        let OKAction = UIAlertAction(title: "OK", style: .Default) {
+            (action) in
+            if let bookId = self.book.id {
             self.bookDataStore.deleteBook(bookId) { (result) in
                 print("book deleted\(result)")
+                }
             }
             self.navigationController?.popViewControllerAnimated(true)
         }
@@ -83,19 +86,21 @@ class BookDetailViewController: UIViewController {
         self.presentViewController(alertController, animated: true, completion: nil)
         }
     
-    // MARK: Check Out
+    // MARK: Check Out Action
     @IBAction func checkOutAction(sender: UIButton) {
         
         let todaysDate:NSDate = NSDate()
         let dateFormatter:NSDateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyy-MM-dd HH:mm:ss zzz"
-        let dateInFormat:String = dateFormatter.stringFromDate(todaysDate)
+        let dateInFormat = dateFormatter.stringFromDate(todaysDate) as String
         print(dateInFormat)
         let deviceName = UIDevice.currentDevice().name
         print(deviceName)
         let param = ["lastCheckedOut" : dateInFormat,
                      "lastCheckedOutBy" : deviceName]
-        bookDataStore.editBook(self.book.id!, param: param)
+        if let bookId = self.book.id {
+        bookDataStore.editBook(bookId, param: param)
+        }
         
         UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             self.popUpView.alpha = 0.0
@@ -114,6 +119,7 @@ class BookDetailViewController: UIViewController {
                 })
         })
   }
+    
     @IBAction func goToWebAction(sender: AnyObject) {
         let xOcean = titleLabel.text ?? "cute dogs"
         let url : NSString = "http://www.google.com/search?q=\(xOcean)"
