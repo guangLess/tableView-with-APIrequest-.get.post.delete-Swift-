@@ -21,7 +21,7 @@ internal final class BookDetailViewController: UIViewController {
     @IBOutlet weak var lineDivider: UILabel!
 
     private let bookDataStore : BookApiCall = BookApiCall.sharedInstance
-    public var book = BookInfomation()
+    internal var book = BookInfomation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,9 +53,7 @@ internal final class BookDetailViewController: UIViewController {
         publisherLabel.sizeToFit()
         lastCheckedOutLabel.text = String(format:"⎜Checked out: %@ ⎜", book.lastCheckedOut ?? "be the first one to take the book!")
         lastCheckedOutByLabel.text = String(format:"⎜@ %@ ⎜", book.lastCheckedOutBy ?? "no time record")
-        
         self.popUpView.alpha = 0
-        
         let deviceOrientation = UIDevice.currentDevice().orientation
         if deviceOrientation.isLandscape {
             lineDivider.hidden = true
@@ -67,7 +65,7 @@ internal final class BookDetailViewController: UIViewController {
  */
     }
     
-     // MARK: delete Action
+     // MARK: Actions
     @IBAction func deleteButtonAction(sender: AnyObject) {
         let alertController = UIAlertController(title: "You are about to delete this book", message: "\(self.book.title!)", preferredStyle: .Alert)
         // TODO: (action)?
@@ -86,9 +84,7 @@ internal final class BookDetailViewController: UIViewController {
         self.presentViewController(alertController, animated: true, completion: nil)
         }
     
-    // MARK: Check Out Action
     @IBAction func checkOutAction(sender: UIButton) {
-        
         let todaysDate:NSDate = NSDate()
         let dateFormatter:NSDateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyy-MM-dd HH:mm:ss zzz"
@@ -114,21 +110,22 @@ internal final class BookDetailViewController: UIViewController {
                     }, completion: nil)
                 UIView.animateWithDuration(0.7, delay: 1.5, options: .CurveEaseIn, animations: {
                      self.popUpView.alpha = 0.77
-                    }, completion: { finished in
+                    }, completion: {
+                        finished in
                         self.navigationController?.popViewControllerAnimated(true)
                 })
         })
   }
-    
+    // MARK: out of app Actions
     @IBAction func goToWebAction(sender: AnyObject) {
         let xOcean = titleLabel.text ?? "cute dogs"
         let url : NSString = "http://www.google.com/search?q=\(xOcean)"
         let urlStr = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-        let searchURL : NSURL = NSURL(string: urlStr as String)!
+        if let searchURL = NSURL(string: urlStr as String) {
         let urlToapp = UIApplication.sharedApplication()
         urlToapp.openURL(searchURL)
+        }
    }
-    
     @IBAction func shareButtonAction(sender: UIButton) {
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter){
             let twitterActionSheet: SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)

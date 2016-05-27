@@ -13,7 +13,7 @@ internal final class BookApiCall {
     
     static let sharedInstance = BookApiCall()
     var bookArray = [BookInfomation]()
-    private let swagApi = APIKeys()
+    private let swagApi = APIKey()
 
     func getBookData(completion: ([[String: AnyObject]]) -> Void) {
         bookArray.removeAll()
