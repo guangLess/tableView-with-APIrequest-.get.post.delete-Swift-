@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-internal final class BookApiCall {
+class BookApiCall {
     
     static let sharedInstance = BookApiCall()
     var bookArray = [BookInfomation]()

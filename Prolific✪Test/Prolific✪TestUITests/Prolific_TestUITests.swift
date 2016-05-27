@@ -1,3 +1,4 @@
+XCUIDevice.sharedDevice().orientation = .Portrait
 //
 //  Prolific_TestUITests.swift
 //  Prolific✪TestUITests
@@ -5,7 +6,7 @@
 //  Created by Guang on 4/29/16.
 //  Copyright © 2016 Guang. All rights reserved.
 //
-
+import UIKit
 import XCTest
 
 class Prolific_TestUITests: XCTestCase {

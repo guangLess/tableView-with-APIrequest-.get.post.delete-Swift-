@@ -5,15 +5,13 @@
 //  Created by Guang on 4/29/16.
 //  Copyright © 2016 Guang. All rights reserved.
 
-// TODO: size classes
-// FIXME: change guard, optional handeling, add pravite, one line for one function. no extra space in functions. Lessforce wrap. spaces after : take out. internal final class
+// TODO: size classes ! Testing.
 
 import UIKit
 
 internal final class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var bookTableView: UITableView!
     @IBOutlet weak var testLabel: UILabel!
-
     let bookDataStore: BookApiCall = BookApiCall.sharedInstance
     
     private struct Storyboard {
@@ -49,7 +47,7 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView,
+   func tableView(tableView: UITableView,
                      numberOfRowsInSection section: Int) -> Int {
         return bookDataStore.bookArray.count
     }
@@ -67,7 +65,7 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
         return bookCell
     }
     
-    private func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("cell selected")
     }
     

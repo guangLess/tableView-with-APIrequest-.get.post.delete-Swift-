@@ -83,7 +83,7 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     }
     
    // MARK: TextField related
-    private func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
         if (textField == addTitle){
         addAuthor.enabled = true
             addAuthor.becomeFirstResponder()
@@ -111,10 +111,8 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     private func checkTextField(textField: UITextField) -> Bool {
         // FIXME: this optional unwarpping is not right....?
         if (textField.text?.characters.count == 0) {
-            if let text = textField.text {
             alertViewActive(textField.placeholder!)
             return false
-            }
         }
         return true
     }
