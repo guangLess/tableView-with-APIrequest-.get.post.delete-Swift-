@@ -21,6 +21,7 @@
 		624C025B1CDA7C14009F90B3 /* AddBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624C025A1CDA7C14009F90B3 /* AddBookViewController.swift */; };
 		624C025D1CE4EE78009F90B3 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624C025C1CE4EE78009F90B3 /* APIKey.swift */; };
 		62980A551CF8F1C8009DD16B /* BookApidCallSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62980A541CF8F1C8009DD16B /* BookApidCallSpec.swift */; };
+		62980A571CF900C5009DD16B /* BookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62980A561CF900C5009DD16B /* BookTests.swift */; };
 		C4B8E8A6C3F0592F726337A4 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 572B6A2B35E68AC877E6999E /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		624C025A1CDA7C14009F90B3 /* AddBookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBookViewController.swift; sourceTree = "<group>"; };
 		624C025C1CE4EE78009F90B3 /* APIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		62980A541CF8F1C8009DD16B /* BookApidCallSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookApidCallSpec.swift; sourceTree = "<group>"; };
+		62980A561CF900C5009DD16B /* BookTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookTests.swift; sourceTree = "<group>"; };
 		ECFBA6390B6D76BBDB61EABE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -140,6 +142,7 @@
 				624C02351CD3C022009F90B3 /* Prolific_TestTests.swift */,
 				62980A541CF8F1C8009DD16B /* BookApidCallSpec.swift */,
 				624C02371CD3C022009F90B3 /* Info.plist */,
+				62980A561CF900C5009DD16B /* BookTests.swift */,
 			);
 			path = "Prolific✪TestTests";
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 			files = (
 				624C02361CD3C022009F90B3 /* Prolific_TestTests.swift in Sources */,
 				62980A551CF8F1C8009DD16B /* BookApidCallSpec.swift in Sources */,
+				62980A571CF900C5009DD16B /* BookTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +510,7 @@
 			baseConfigurationReference = ECFBA6390B6D76BBDB61EABE /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = NO;
 				INFOPLIST_FILE = "Prolific✪Test/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "waterBB.optional.Prolific-Test";
@@ -518,6 +523,7 @@
 			baseConfigurationReference = 0DD6EB0A9A00FF48A1C427D2 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = NO;
 				INFOPLIST_FILE = "Prolific✪Test/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "waterBB.optional.Prolific-Test";

@@ -9,7 +9,8 @@
 
 import UIKit
 
-internal final class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+//internal final
+class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var bookTableView: UITableView!
     @IBOutlet weak var testLabel: UILabel!
     let bookDataStore: BookApiCall = BookApiCall.sharedInstance

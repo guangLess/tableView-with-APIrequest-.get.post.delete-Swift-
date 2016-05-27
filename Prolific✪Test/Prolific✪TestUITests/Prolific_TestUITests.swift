@@ -1,4 +1,4 @@
-XCUIDevice.sharedDevice().orientation = .Portrait
+//XCUIDevice.sharedDevice().orientation = .Portrait
 //
 //  Prolific_TestUITests.swift
 //  Prolific✪TestUITests
