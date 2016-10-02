@@ -14,7 +14,9 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     @IBOutlet weak var addCatories: UITextField!
     @IBOutlet weak var addPublisher: UITextField!
     @IBOutlet weak var submitButtonOutlet: UIButton!
-    private var book = BookInfomation()
+    private var book = Book()
+
+    lazy var networkController = librarySystem()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,9 +41,9 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
                 let addBookalertVC = UIAlertController(title:nil, message: submitString, preferredStyle: .Alert)
                 let okAction = UIAlertAction(title: "Great💥let's submit", style: .Default) {
                     (action) -> Void in
-                    let addBookDataStore = BookApiCall.sharedInstance
-                    //TODO: add a progress bar?
-                    addBookDataStore.postAbook(self.book.dictionary) { (result) in
+                    let addBookDataStore = self.networkController   //BookApiCall.sharedInstance
+                    
+                        addBookDataStore.postAbook(self.book) { (result) in
                         print("result = \(result) book added\(self.book.dictionary)")
                     }
                     self.dismissViewControllerAnimated(true, completion: nil);

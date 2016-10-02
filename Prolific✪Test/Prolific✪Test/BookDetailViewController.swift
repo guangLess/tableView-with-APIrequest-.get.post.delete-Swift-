@@ -10,7 +10,6 @@ import UIKit
 import Social
 
 internal final class BookDetailViewController: UIViewController {
-    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
@@ -20,9 +19,9 @@ internal final class BookDetailViewController: UIViewController {
     @IBOutlet weak var popUpView: UILabel!
     @IBOutlet weak var lineDivider: UILabel!
 
-    private let bookDataStore : BookApiCall = BookApiCall.sharedInstance
-    internal var book = BookInfomation()
-    
+    internal var book = Book()
+    lazy var networkController: NetworkController = librarySystem()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
@@ -31,7 +30,7 @@ internal final class BookDetailViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+    //FIXME: maybe make it into a potocol or extention?
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.currentDevice().orientation.isLandscape.boolValue {
             print("Landscape")
@@ -44,38 +43,55 @@ internal final class BookDetailViewController: UIViewController {
     
 // MARK: UI
     func updateUI() {
-        titleLabel.text = book.title ?? "This book has no Title.😜"
-        titleLabel.sizeToFit()
-        authorLabel.text = book.author ?? "No Author😜"
-        authorLabel.sizeToFit()
-        categoryLabel.text = String(format:"⎣Category: %@⎦", book.categories ?? "Not Categorized")
-        publisherLabel.text = String(format:"⎣Publisher: %@⎦", book.publisher ?? "No Publisher 😜")
-        publisherLabel.sizeToFit()
-        lastCheckedOutLabel.text = String(format:"⎜Checked out: %@ ⎜", book.lastCheckedOut ?? "be the first one to take the book!")
-        lastCheckedOutByLabel.text = String(format:"⎜@ %@ ⎜", book.lastCheckedOutBy ?? "no time record")
+        
+       // if let title = book.title as? String  {
+       //     titleLabel.text = title } else {titleLabel.text = "xo"}
         self.popUpView.alpha = 0
-        let deviceOrientation = UIDevice.currentDevice().orientation
-        if deviceOrientation.isLandscape {
-            lineDivider.hidden = true
-        } else {
-            lineDivider.hidden = false
+        let noContent = " "
+       _ = book.title.flatMap { t in
+        titleLabel.text = t as? String ?? "✍🏾 No Content"
         }
+        _ = book.author.flatMap({ t in
+            authorLabel.text = t as? String ?? noContent
+        })
+        _ = book.categories.flatMap({ t in
+            categoryLabel.text = t as? String ?? noContent
+        })
+        _ = book.publisher.flatMap({ t in
+            publisherLabel.text = t as? String ?? noContent
+        })
+        _ = book.lastCheckedOut.flatMap({ t in
+            lastCheckedOutLabel.text = t as? String ?? noContent
+        })
+        _ = book.lastCheckedOutBy.flatMap({ t in
+            lastCheckedOutByLabel.text = t as? String ?? noContent
+        })
+
+//        let deviceOrientation = UIDevice.currentDevice().orientation
+//        if deviceOrientation.isLandscape {
+//            lineDivider.hidden = true
+//        } else {
+//            lineDivider.hidden = false
+//        }
 /*
         let fullText = "Allo,This is book is published by \(book.publisher), last checkOut at \(book.lastCheckedOut), by this person \(book.lastCheckedOutBy). We think this place \(book.publisher) published it! Hope you enjoy it"
  */
     }
-    
      // MARK: Actions
     @IBAction func deleteButtonAction(sender: AnyObject) {
         let alertController = UIAlertController(title: "You are about to delete this book", message: "\(self.book.title!)", preferredStyle: .Alert)
         // TODO: (action)?
-        let OKAction = UIAlertAction(title: "OK", style: .Default) {
-            (action) in
-            if let bookId = self.book.id {
-            self.bookDataStore.deleteBook(bookId) { (result) in
-                print("book deleted\(result)")
-                }
-            }
+        let OKAction = UIAlertAction(title: "OK", style: .Default){ (action) in
+            let bookId = self.book.id.map{$0 as! Int}
+            self.networkController.deleteBook(bookId!, completion: { (result) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    print("book deleted\(result)")
+                    })
+                })
+//            self.bookDataStore.deleteBook(bookId) { (result) in
+//                print("book deleted\(result)")
+//                }
+            
             self.navigationController?.popViewControllerAnimated(true)
         }
         alertController.addAction(OKAction)
@@ -95,7 +111,7 @@ internal final class BookDetailViewController: UIViewController {
         let param = ["lastCheckedOut" : dateInFormat,
                      "lastCheckedOutBy" : deviceName]
         if let bookId = self.book.id {
-        bookDataStore.editBook(bookId, param: param)
+        //bookDataStore.editBook(bookId, param: param)
         }
         
         UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {

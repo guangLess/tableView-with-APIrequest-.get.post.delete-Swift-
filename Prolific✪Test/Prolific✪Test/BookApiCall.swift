@@ -5,7 +5,7 @@
 //  Created by Guang on 5/2/16.
 //  Copyright © 2016 Guang. All rights reserved.
 //
-
+/*
 import Foundation
 import Alamofire
 
@@ -15,10 +15,11 @@ class BookApiCall {
     var bookArray = [BookInfomation]()
     private let swagApi = APIKey()
 
-    func getBookData(completion: ([[String: AnyObject]]) -> Void) {
+    func getBookData(completion: ([BookInfomation]) -> Void) {
         bookArray.removeAll()
-        Alamofire.request(.GET, swagApi.getApi).responseJSON {
-            response in
+        Alamofire.request(.GET, swagApi.getApi).responseJSON { response in
+            /*
+            
             guard response.result.error == nil
                 else {
                     print ("Error. \(response.result.error?.localizedDescription) and \(response.debugDescription)")
@@ -33,13 +34,29 @@ class BookApiCall {
                     self.bookArray.append(book)
                 }
             }
+         */
+            switch response.result{
+            case .Success:
+             let resultData = response.result.value as! NSMutableArray
+             
+             for eachBook in resultData{
+                print(eachBook)
+                //let bookmodel = BookInfomation(author: <#T##AnyObject?#>, categories: <#T##AnyObject?#>, id: <#T##AnyObject?#>, lastCheckedOut: <#T##AnyObject?#>, lastCheckedOutBy: <#T##AnyObject?#>, publisher: <#T##AnyObject?#>, title: <#T##AnyObject?#>, url: <#T##AnyObject?#>)
+                
+                //self.bookArray.append(eachBook)
+                }
+                
+            case .Failure(let error):
+                print(error)
+            }
+            
         }
     }
     
-    private func addPropertyToBook(book: [String : AnyObject]) -> BookInfomation {
-        let book = BookInfomation(author: book["author"] as? String , categories: book["categories"] as? String, id:book["id"] as? Int, lastCheckedOut: book["lastCheckedOut"] as? String, lastCheckedOutBy: book["lastCheckedOutBy"] as? String, publisher: book["publisher"] as? String, title: book["title"] as? String, url:book["book.url"] as? String)
-        return book
-    }
+//    private func addPropertyToBook(book: [String : AnyObject]) -> BookInfomation {
+//        let book = BookInfomation(author: book["author"] as? String , categories: book["categories"] as? String, id:book["id"] as? Int, lastCheckedOut: book["lastCheckedOut"] as? String, lastCheckedOutBy: book["lastCheckedOutBy"] as? String, publisher: book["publisher"] as? String, title: book["title"] as? String, url:book["book.url"] as? String)
+//        return book
+//    }
     
     func postAbook(bookInfo:[String:AnyObject], completion: (result: Bool) -> Void) {
         let postedBookDictionary = bookInfo
@@ -86,3 +103,4 @@ class BookApiCall {
         }
     }
 }
+ */
