@@ -126,10 +126,11 @@
 		624C021F1CD3C022009F90B3 /* Prolific✪Test */ = {
 			isa = PBXGroup;
 			children = (
-				62F06CF71DA02C9800353999 /* NewModelStuff */,
+				62F06CF71DA02C9800353999 /* Model */,
 				624C024E1CD3CC66009F90B3 /* SWAGViewController.swift */,
 				624C02581CD7EC7E009F90B3 /* BookDetailViewController.swift */,
 				624C025A1CDA7C14009F90B3 /* AddBookViewController.swift */,
+				62F06CFA1DA1B4AD00353999 /* ViewExtention.swift */,
 				624C02561CD7CBC3009F90B3 /* BookTableViewCell.swift */,
 				624C02241CD3C022009F90B3 /* Main.storyboard */,
 			);
@@ -156,15 +157,14 @@
 			path = "Prolific✪TestUITests";
 			sourceTree = "<group>";
 		};
-		62F06CF71DA02C9800353999 /* NewModelStuff */ = {
+		62F06CF71DA02C9800353999 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				624C02521CD3D8EE009F90B3 /* Book.swift */,
 				624C025C1CE4EE78009F90B3 /* APIKey.swift */,
 				62F06CF81DA0302600353999 /* NetworkController.swift */,
-				62F06CFA1DA1B4AD00353999 /* ViewExtention.swift */,
 			);
-			name = NewModelStuff;
+			name = Model;
 			sourceTree = "<group>";
 		};
 		9354CE2F26E7AE14924B3BD0 /* Frameworks */ = {

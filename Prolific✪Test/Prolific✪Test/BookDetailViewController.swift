@@ -29,17 +29,7 @@ internal final class BookDetailViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    //FIXME: maybe make it into a potocol or extention?
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        if UIDevice.currentDevice().orientation.isLandscape.boolValue {
-            print("Landscape")
-            lineDivider.hidden = true
-        } else {
-            lineDivider.hidden = false
-            print("Portrait")
-        }
-    }
-    // MARK: UI
+    
     private func updateUI() {
         self.popUpView.alpha = 0
         let noContent = " "
@@ -115,6 +105,16 @@ internal final class BookDetailViewController: UIViewController {
             let alert = UIAlertController(title: "", message: "You are not loged in on Twitter", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    //FIXME: maybe make it into a potocol?
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.currentDevice().orientation.isLandscape.boolValue {
+            print("Landscape")
+            lineDivider.hidden = true
+        } else {
+            lineDivider.hidden = false
+            print("Portrait")
         }
     }
 }

@@ -11,12 +11,12 @@ import Foundation
 struct Book {
     var author: AnyObject?
     var categories: AnyObject?
-    var id: AnyObject? //NSNumber
-    var lastCheckedOut: AnyObject?//NSMu
-    var lastCheckedOutBy: AnyObject?//NSMU
+    var id: AnyObject?
+    var lastCheckedOut: AnyObject?
+    var lastCheckedOutBy: AnyObject?
     var publisher: AnyObject?
     var title: AnyObject?
-    var url: AnyObject?//NSMu
+    var url: AnyObject?
     var dictionary: [String : String] {
         get {
             return [

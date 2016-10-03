@@ -4,12 +4,10 @@
 //
 //  Created by Guang on 10/2/16.
 //  Copyright © 2016 Guang. All rights reserved.
-//
 
 import Foundation
 import UIKit
 
-//protocol PopView { }
 extension UILabel {
     func popAnimation(book:String, completion: Bool  -> ()) {
         
@@ -28,5 +26,3 @@ extension UILabel {
         })
     }
 }
-
-    

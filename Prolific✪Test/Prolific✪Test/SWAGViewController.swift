@@ -9,21 +9,17 @@ import UIKit
 
 internal final class SWAGViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var bookTableView: UITableView!
-    @IBOutlet weak var testLabel: UILabel!
-
-    lazy var networkController: NetworkController = librarySystem()
-    var result = [Book]()
-
     private struct Storyboard {
         static let CellReuseIdentifier = "cell"
     }
+    lazy var networkController: NetworkController = librarySystem()
+    var result = [Book]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         bookTableView.dataSource = self
         bookTableView.delegate = self
-        testLabel.text = "This is a test!"
-        //refreshTableView()
-        //FIXME: reload twice
+        refreshTableView()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -34,14 +30,10 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
         networkController.getBookData { books in
             dispatch_async(dispatch_get_main_queue(), {
                 self.result = books
-                print("---------------shane is ass\n \(self.result.count)")
                 self.bookTableView.reloadData()
             })
         }
     }
-    @IBAction func addBookAction(sender: AnyObject) {
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -52,8 +44,6 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let bookCell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as! BookTableViewCell
         let bookC = result[indexPath.row]
-        //FIXME: add struct here for each cellContent
-        print("author of the book \(bookC.author) ---- title = \(bookC.title)")
         _ = bookC.title.map { title in
             bookCell.titleLabel.text = title as? String
             bookCell.titleLabel.sizeToFit()
@@ -66,7 +56,6 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("cell selected")
-        //self.performSegueWithIdentifier("toDetail", sender: indexPath)
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "toDetail") {

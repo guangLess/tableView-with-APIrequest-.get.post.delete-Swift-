@@ -38,7 +38,6 @@ struct librarySystem: NetworkController {
             }
         }
     }
-    
     private func makeBook(eachBook: [String : AnyObject]) -> Book{
         let author = eachBook["author"]
         let id = eachBook["id"]
@@ -50,9 +49,7 @@ struct librarySystem: NetworkController {
         let categories = eachBook["categories"]
         return Book(author: author, categories:categories, id: id, lastCheckedOut: lastCheckedOut, lastCheckedOutBy: lastCheckedOutBy, publisher: publisher, title: title, url: url)
         }
-
     func postAbook(book:Book, completion: (result: Bool) -> Void) {
-        //let postedBookDictionary = bookInfo
         Alamofire.request(.POST, swagApi.postApi, parameters: book.dictionary, encoding: .JSON)
             .validate()
             .responseJSON { response in
@@ -66,7 +63,6 @@ struct librarySystem: NetworkController {
                 }
         }
     }
-    
     func deleteBook(input: Int, completion: (result: String) -> Void) {
         print("bookId is = \(input)")
         let url = swagApi.postApi
@@ -75,20 +71,17 @@ struct librarySystem: NetworkController {
             .responseJSON {
                 response in
                 guard response.result.error == nil else {
-                    // got an error in getting the data, need to handle it
                     print("error\(response.result.error)")
                     return
                 }
                 completion(result: "book deleted!")
         }
     }
-    
     func editBook (input: Int, param : [String: String]) {
         let url = swagApi.postApi
         let bookIDURL = String(format:"%@/%@",url,String(input))
         Alamofire.request(.PUT, bookIDURL, parameters: param)
             .response { (request, response, data, error) in
-                print(response)
                 print(error)
         }
     }

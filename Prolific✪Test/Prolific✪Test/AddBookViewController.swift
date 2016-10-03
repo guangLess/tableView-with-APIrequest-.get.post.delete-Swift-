@@ -17,7 +17,6 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     private var book = Book()
 
     lazy var networkController = librarySystem()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         addDelegate()
@@ -57,8 +56,6 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
             }
         }
     }
-    // MARK: Button Action
-    //TOFIX : B -> b , make the animation slower
     @IBAction func BackButtonAction(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil);
     }
