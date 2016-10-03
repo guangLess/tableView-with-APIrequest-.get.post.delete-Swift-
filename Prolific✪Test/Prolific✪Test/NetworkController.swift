@@ -10,12 +10,13 @@ import Alamofire
 
 protocol NetworkController {
     func getBookData(completion: ([Book]) -> ())
+    func postAbook(book:Book, completion: (result: Bool) -> ())
     func deleteBook(input: Int, completion: (result: String) -> ())
+    func editBook (input: Int, param : [String: String])
 }
 
 struct librarySystem: NetworkController {
     private let swagApi = APIKey()
-    // static let sharedInstance = librarySystem()
       func getBookData(completion: ([Book]) -> Void) {
         Alamofire.request(.GET, swagApi.getApi).responseJSON { response in
             switch response.result{
@@ -87,10 +88,8 @@ struct librarySystem: NetworkController {
         let bookIDURL = String(format:"%@/%@",url,String(input))
         Alamofire.request(.PUT, bookIDURL, parameters: param)
             .response { (request, response, data, error) in
-                //print(request)
                 print(response)
                 print(error)
         }
     }
 }
-

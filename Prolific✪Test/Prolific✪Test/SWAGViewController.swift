@@ -22,15 +22,13 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
         bookTableView.dataSource = self
         bookTableView.delegate = self
         testLabel.text = "This is a test!"
-        refreshTableView()
+        //refreshTableView()
         //FIXME: reload twice
-
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         refreshTableView()
     }
-    
     private func refreshTableView() {
         self.result.removeAll()
         networkController.getBookData { books in
@@ -41,19 +39,16 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
             })
         }
     }
-    
     @IBAction func addBookAction(sender: AnyObject) {
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
    func tableView(tableView: UITableView,
                      numberOfRowsInSection section: Int) -> Int {
         return result.count
     }
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let bookCell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as! BookTableViewCell
         let bookC = result[indexPath.row]
@@ -69,16 +64,13 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
         })
         return bookCell
     }
-    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("cell selected")
         //self.performSegueWithIdentifier("toDetail", sender: indexPath)
     }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "toDetail") {
             let destinationVC = segue.destinationViewController as? BookDetailViewController
-            //let row = Int((sender?.row)!)
             if let row = bookTableView.indexPathForSelectedRow?.row{
             print(row)
             print (result[row])
@@ -87,10 +79,3 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
         }
     }
 }
-
-
-struct BookTableViewData{
-    var count: Int
-    var results: String
-}
-

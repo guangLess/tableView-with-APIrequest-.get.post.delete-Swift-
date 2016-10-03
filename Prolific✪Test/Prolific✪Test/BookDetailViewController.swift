@@ -21,12 +21,11 @@ internal final class BookDetailViewController: UIViewController {
 
     internal var book = Book()
     lazy var networkController: NetworkController = librarySystem()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
     }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -40,16 +39,12 @@ internal final class BookDetailViewController: UIViewController {
             print("Portrait")
         }
     }
-    
-// MARK: UI
-    func updateUI() {
-        
-       // if let title = book.title as? String  {
-       //     titleLabel.text = title } else {titleLabel.text = "xo"}
+    // MARK: UI
+    private func updateUI() {
         self.popUpView.alpha = 0
         let noContent = " "
-       _ = book.title.flatMap { t in
-        titleLabel.text = t as? String ?? "✍🏾 No Content"
+        _ = book.title.flatMap { t in
+            titleLabel.text = t as? String ?? "✍🏾 No Content"
         }
         _ = book.author.flatMap({ t in
             authorLabel.text = t as? String ?? noContent
@@ -66,82 +61,51 @@ internal final class BookDetailViewController: UIViewController {
         _ = book.lastCheckedOutBy.flatMap({ t in
             lastCheckedOutByLabel.text = t as? String ?? noContent
         })
-
-//        let deviceOrientation = UIDevice.currentDevice().orientation
-//        if deviceOrientation.isLandscape {
-//            lineDivider.hidden = true
-//        } else {
-//            lineDivider.hidden = false
-//        }
-/*
-        let fullText = "Allo,This is book is published by \(book.publisher), last checkOut at \(book.lastCheckedOut), by this person \(book.lastCheckedOutBy). We think this place \(book.publisher) published it! Hope you enjoy it"
- */
     }
-     // MARK: Actions
+    // MARK: Actions
     @IBAction func deleteButtonAction(sender: AnyObject) {
         let alertController = UIAlertController(title: "You are about to delete this book", message: "\(self.book.title!)", preferredStyle: .Alert)
-        // TODO: (action)?
         let OKAction = UIAlertAction(title: "OK", style: .Default){ (action) in
             let bookId = self.book.id.map{$0 as! Int}
             self.networkController.deleteBook(bookId!, completion: { (result) in
                 dispatch_async(dispatch_get_main_queue(), {
                     print("book deleted\(result)")
-                    })
                 })
-//            self.bookDataStore.deleteBook(bookId) { (result) in
-//                print("book deleted\(result)")
-//                }
-            
+            })
             self.navigationController?.popViewControllerAnimated(true)
         }
         alertController.addAction(OKAction)
         let cancelAction = UIAlertAction(title: "Cancle", style: .Default, handler: nil)
         alertController.addAction(cancelAction)
         self.presentViewController(alertController, animated: true, completion: nil)
-        }
+    }
     
     @IBAction func checkOutAction(sender: UIButton) {
         let todaysDate:NSDate = NSDate()
         let dateFormatter:NSDateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyy-MM-dd HH:mm:ss zzz"
         let dateInFormat = dateFormatter.stringFromDate(todaysDate) as String
-        print(dateInFormat)
-        let deviceName = UIDevice.currentDevice().name
-        print(deviceName)
         let param = ["lastCheckedOut" : dateInFormat,
-                     "lastCheckedOutBy" : deviceName]
-        if let bookId = self.book.id {
-        //bookDataStore.editBook(bookId, param: param)
+                     "lastCheckedOutBy" : UIDevice.currentDevice().name]
+        if let bookId = self.book.id as? Int {
+            self.networkController.editBook(bookId, param: param)
         }
+        let checkOutText = "You just checked out book\n ✎\(book.title!)"
+        popUpView.popAnimation(checkOutText) { _ in
+                self.navigationController?.popViewControllerAnimated(true)
+                }
         
-        UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-            self.popUpView.alpha = 0.0
-            }, completion: {
-                (finished: Bool) -> Void in
-                //Once the label is completely invisible, set the text and fade it back in
-                self.popUpView.hidden = false
-                self.popUpView.text = "You checked out \n ✎\(self.book.title!)"
-                UIView.animateWithDuration(2.0, delay:0.3, options: UIViewAnimationOptions.CurveEaseIn, animations: {
-                    self.popUpView.alpha = 1.0
-                    }, completion: nil)
-                UIView.animateWithDuration(0.7, delay: 1.5, options: .CurveEaseIn, animations: {
-                     self.popUpView.alpha = 0.77
-                    }, completion: {
-                        finished in
-                        self.navigationController?.popViewControllerAnimated(true)
-                })
-        })
-  }
-    // MARK: out of app Actions
+    }
+    // MARK: APP extentions
     @IBAction func goToWebAction(sender: AnyObject) {
-        let xOcean = titleLabel.text ?? "cute dogs"
-        let url : NSString = "http://www.google.com/search?q=\(xOcean)"
+        let searchBook = titleLabel.text ?? "cute dogs"
+        let url : NSString = "http://www.google.com/search?q=\(searchBook)"
         let urlStr = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         if let searchURL = NSURL(string: urlStr as String) {
-        let urlToapp = UIApplication.sharedApplication()
-        urlToapp.openURL(searchURL)
+            let urlToapp = UIApplication.sharedApplication()
+            urlToapp.openURL(searchURL)
         }
-   }
+    }
     @IBAction func shareButtonAction(sender: UIButton) {
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter){
             let twitterActionSheet: SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)

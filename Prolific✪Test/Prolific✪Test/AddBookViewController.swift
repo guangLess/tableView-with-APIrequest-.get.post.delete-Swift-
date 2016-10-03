@@ -23,7 +23,6 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
         addDelegate()
         submitButtonOutlet.enabled = false
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -83,7 +82,6 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
         print ("publisher checker")
         book.publisher = sender.text!
     }
-    
    // MARK: TextField related
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if (textField == addTitle){
