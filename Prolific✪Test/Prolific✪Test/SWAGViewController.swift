@@ -54,9 +54,9 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
         })
         return bookCell
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("cell selected")
-    }
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        print("cell selected")
+//    }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "toDetail") {
             let destinationVC = segue.destinationViewController as? BookDetailViewController

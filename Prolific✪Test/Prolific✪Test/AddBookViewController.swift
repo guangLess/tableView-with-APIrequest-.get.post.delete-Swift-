@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 internal final class AddBookViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var addTitle: UITextField!
     @IBOutlet weak var addAuthor: UITextField!
@@ -15,8 +14,8 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     @IBOutlet weak var addPublisher: UITextField!
     @IBOutlet weak var submitButtonOutlet: UIButton!
     private var book = Book()
-
     lazy var networkController = librarySystem()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addDelegate()
@@ -35,12 +34,11 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     @IBAction func submitButtonAction(sender: AnyObject) {
         if let title = book.title {
             if let author = book.author {
-                let submitString = "📖 \(title) by \(author) is trying to add itself"
+                let submitString = "📖 \(title) by \(author) is about to be added"
                 let addBookalertVC = UIAlertController(title:nil, message: submitString, preferredStyle: .Alert)
-                let okAction = UIAlertAction(title: "Great💥let's submit", style: .Default) {
+                let okAction = UIAlertAction(title: "Great💥submit", style: .Default) {
                     (action) -> Void in
                     let addBookDataStore = self.networkController   //BookApiCall.sharedInstance
-                    
                         addBookDataStore.postAbook(self.book) { (result) in
                         print("result = \(result) book added\(self.book.dictionary)")
                     }
@@ -73,6 +71,7 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
         checkTextField(sender)
         print ("catagory  check")
         book.categories = sender.text!
+        resignFirstResponder()
     }
     @IBAction func publisher(sender: UITextField) {
         checkTextField(sender)
@@ -98,15 +97,14 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
         }
         if (textField == addPublisher){
             submitButtonOutlet.enabled = true
+            view.endEditing(true)
             submitButtonOutlet.setTitle("📖 submit", forState: .Normal)
             print(book.dictionary)
             return true
         }
         return false
     }
-    
     private func checkTextField(textField: UITextField) -> Bool {
-        // FIXME: this optional unwarpping is not right....?
         if (textField.text?.characters.count == 0) {
             alertViewActive(textField.placeholder!)
             return false
@@ -115,12 +113,9 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     }
  // MARK: TextFieldAlert
     private func alertViewActive(missingText : String) {
-        let alertController = UIAlertController(title: "Yo, \(missingText)?", message: "", preferredStyle: .Alert)
-        let OKAction = UIAlertAction(title: "OK", style: .Default)
-        {
-            // FIXME: handle this
-            (action) in
-        }
+        let alertController = UIAlertController(title: "\(missingText)?", message: "", preferredStyle: .Alert)
+        let OKAction = UIAlertAction(title: "OK", style: .Default){(action) in
+            }
         alertController.addAction(OKAction)
         self.presentViewController(alertController, animated: true) {
         }
