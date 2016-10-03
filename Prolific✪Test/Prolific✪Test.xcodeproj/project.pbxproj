@@ -130,8 +130,8 @@
 				624C024E1CD3CC66009F90B3 /* SWAGViewController.swift */,
 				624C02581CD7EC7E009F90B3 /* BookDetailViewController.swift */,
 				624C025A1CDA7C14009F90B3 /* AddBookViewController.swift */,
-				62F06CFA1DA1B4AD00353999 /* ViewExtention.swift */,
 				624C02561CD7CBC3009F90B3 /* BookTableViewCell.swift */,
+				62F06CFA1DA1B4AD00353999 /* ViewExtention.swift */,
 				624C02241CD3C022009F90B3 /* Main.storyboard */,
 			);
 			path = "Prolific✪Test";

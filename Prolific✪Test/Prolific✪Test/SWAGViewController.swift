@@ -14,7 +14,7 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
     }
     lazy var networkController: NetworkController = librarySystem()
     var result = [Book]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bookTableView.dataSource = self
@@ -37,8 +37,8 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-   func tableView(tableView: UITableView,
-                     numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
         return result.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -58,9 +58,9 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
         if (segue.identifier == "toDetail") {
             let destinationVC = segue.destinationViewController as? BookDetailViewController
             if let row = bookTableView.indexPathForSelectedRow?.row{
-            print(row)
-            print (result[row])
-            destinationVC?.book = result[row]
+                print(row)
+                print (result[row])
+                destinationVC?.book = result[row]
             }
         }
     }
