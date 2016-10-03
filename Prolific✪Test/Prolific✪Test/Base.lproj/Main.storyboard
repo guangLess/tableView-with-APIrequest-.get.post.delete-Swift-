@@ -113,14 +113,14 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="HWe-gW-52U" userLabel="Author/Title-Stack">
                                 <rect key="frame" x="38" y="104" width="539" height="43"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZo-ZQ-s5Y">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZo-ZQ-s5Y">
                                         <rect key="frame" x="0.0" y="0.0" width="539" height="24"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Author" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HVf-82-TNF">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HVf-82-TNF">
                                         <rect key="frame" x="0.0" y="24" width="539" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="QDf-tY-wji"/>
@@ -168,14 +168,8 @@
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="dZB-3P-IKV" firstAttribute="top" secondItem="UdS-K0-abu" secondAttribute="top" constant="23" id="Ruu-eV-TBB"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="93" id="ccY-NX-PXQ"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Ruu-eV-TBB"/>
-                                    </mask>
-                                </variation>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r1q-j9-mee">
                                 <rect key="frame" x="30" y="330" width="295" height="192"/>
@@ -244,11 +238,9 @@
                             <constraint firstItem="Gcm-o3-TNk" firstAttribute="centerX" secondItem="TMO-KA-7QG" secondAttribute="centerX" id="5Mg-x0-3sA"/>
                             <constraint firstItem="Gcm-o3-TNk" firstAttribute="bottom" secondItem="xZW-X8-4c3" secondAttribute="top" id="8LV-JZ-dez"/>
                             <constraint firstItem="UdS-K0-abu" firstAttribute="leading" secondItem="TMO-KA-7QG" secondAttribute="leading" constant="38" id="BmO-5s-PFw"/>
-                            <constraint firstItem="UdS-K0-abu" firstAttribute="top" secondItem="HWe-gW-52U" secondAttribute="bottom" constant="51" id="CD5-iO-yWt"/>
                             <constraint firstItem="Gcm-o3-TNk" firstAttribute="width" secondItem="TMO-KA-7QG" secondAttribute="width" id="Eee-EP-B9Y"/>
                             <constraint firstItem="ag9-1Q-xbr" firstAttribute="leading" secondItem="TMO-KA-7QG" secondAttribute="leading" constant="30" id="GOr-Yq-UVA"/>
-                            <constraint firstItem="Gcm-o3-TNk" firstAttribute="top" secondItem="6HF-MZ-kGg" secondAttribute="bottom" id="JtO-Fw-rdM"/>
-                            <constraint firstItem="HWe-gW-52U" firstAttribute="top" secondItem="Mqj-z6-3gJ" secondAttribute="bottom" constant="40" id="RJ5-XG-DPN"/>
+                            <constraint firstItem="HWe-gW-52U" firstAttribute="top" relation="lessThanOrEqual" secondItem="Mqj-z6-3gJ" secondAttribute="bottom" constant="40" id="RJ5-XG-DPN"/>
                             <constraint firstItem="HWe-gW-52U" firstAttribute="leading" secondItem="TMO-KA-7QG" secondAttribute="leading" constant="38" id="RQS-Ob-TEU"/>
                             <constraint firstItem="Gcm-o3-TNk" firstAttribute="top" secondItem="ag9-1Q-xbr" secondAttribute="bottom" constant="15" id="Rkr-ZA-2K9"/>
                             <constraint firstAttribute="trailing" secondItem="Gcm-o3-TNk" secondAttribute="trailing" id="W81-y2-1bU"/>
@@ -256,11 +248,8 @@
                             <constraint firstItem="r1q-j9-mee" firstAttribute="width" secondItem="TMO-KA-7QG" secondAttribute="width" multiplier="0.5" constant="-5" id="dCw-a4-ozJ"/>
                             <constraint firstItem="ag9-1Q-xbr" firstAttribute="centerY" secondItem="TMO-KA-7QG" secondAttribute="centerY" id="fPN-lE-kDV"/>
                             <constraint firstItem="r1q-j9-mee" firstAttribute="leading" secondItem="TMO-KA-7QG" secondAttribute="leading" constant="30" id="fUQ-3D-yf2"/>
-                            <constraint firstItem="UdS-K0-abu" firstAttribute="top" secondItem="HWe-gW-52U" secondAttribute="bottom" constant="51" id="gAH-xN-GqI"/>
                             <constraint firstItem="ag9-1Q-xbr" firstAttribute="trailing" secondItem="TMO-KA-7QG" secondAttribute="trailing" constant="-30" id="iFm-MG-vPk"/>
-                            <constraint firstItem="Gcm-o3-TNk" firstAttribute="height" secondItem="TMO-KA-7QG" secondAttribute="height" multiplier="0.4" id="iNc-DG-gJB"/>
                             <constraint firstItem="6HF-MZ-kGg" firstAttribute="top" secondItem="ag9-1Q-xbr" secondAttribute="bottom" constant="30" id="jlU-sl-zGv"/>
-                            <constraint firstItem="UdS-K0-abu" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="ag9-1Q-xbr" secondAttribute="top" constant="-34" id="k5L-6I-y6U"/>
                             <constraint firstItem="UdS-K0-abu" firstAttribute="top" relation="greaterThanOrEqual" secondItem="HWe-gW-52U" secondAttribute="bottom" priority="999" constant="8" id="l8u-xq-ig0"/>
                             <constraint firstItem="HWe-gW-52U" firstAttribute="trailing" secondItem="TMO-KA-7QG" secondAttribute="trailing" constant="-23" id="mYc-LP-I63"/>
                             <constraint firstItem="6HF-MZ-kGg" firstAttribute="trailing" secondItem="TMO-KA-7QG" secondAttribute="trailing" constant="-30" id="oxz-be-dn0"/>
@@ -269,15 +258,6 @@
                             <constraint firstItem="r1q-j9-mee" firstAttribute="top" secondItem="ag9-1Q-xbr" secondAttribute="bottom" constant="30" id="ywo-39-KFa"/>
                             <constraint firstItem="UdS-K0-abu" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TMO-KA-7QG" secondAttribute="trailing" constant="-30" id="z4g-Jo-QIx"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="CD5-iO-yWt"/>
-                                <exclude reference="gAH-xN-GqI"/>
-                                <exclude reference="k5L-6I-y6U"/>
-                                <exclude reference="JtO-Fw-rdM"/>
-                                <exclude reference="iNc-DG-gJB"/>
-                            </mask>
-                        </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <toolbarItems/>

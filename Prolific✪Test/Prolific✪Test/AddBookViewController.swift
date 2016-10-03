@@ -15,37 +15,34 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     @IBOutlet weak var submitButtonOutlet: UIButton!
     private var book = Book()
     lazy var networkController = librarySystem()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        addDelegate()
+        addDelegates()
         submitButtonOutlet.enabled = false
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    private func addDelegate()  {
+    private func addDelegates()  {
         addTitle.delegate = self
         addAuthor.delegate = self
         addCatories.delegate = self
         addPublisher.delegate = self
     }
-  // MARK : Submit
+    // MARK : Submit
     @IBAction func submitButtonAction(sender: AnyObject) {
         if let title = book.title {
             if let author = book.author {
                 let submitString = "📖 \(title) by \(author) is about to be added"
                 let addBookalertVC = UIAlertController(title:nil, message: submitString, preferredStyle: .Alert)
-                let okAction = UIAlertAction(title: "Great💥submit", style: .Default) {
-                    (action) -> Void in
-                    let addBookDataStore = self.networkController   //BookApiCall.sharedInstance
-                        addBookDataStore.postAbook(self.book) { (result) in
+                let okAction = UIAlertAction(title: "Great💥submit", style: .Default){ _ in
+                    self.networkController.postAbook(self.book) { result in
                         print("result = \(result) book added\(self.book.dictionary)")
                     }
-                    self.dismissViewControllerAnimated(true, completion: nil);
+                    self.dismissViewControllerAnimated(true, completion: nil)
                 }
-                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) {
-                    (action) -> Void in
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel){ _ in
                     self.submitButtonOutlet.setTitle("Submit 📖 again", forState: .Normal)
                 }
                 addBookalertVC.addAction(cancelAction)
@@ -78,10 +75,10 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
         print ("publisher checker")
         book.publisher = sender.text!
     }
-   // MARK: TextField related
+    // MARK: TextField related
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if (textField == addTitle){
-        addAuthor.enabled = true
+            addAuthor.enabled = true
             addAuthor.becomeFirstResponder()
             return true
         }
@@ -111,11 +108,11 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
         }
         return true
     }
- // MARK: TextFieldAlert
+    // MARK: TextFieldAlert
     private func alertViewActive(missingText : String) {
         let alertController = UIAlertController(title: "\(missingText)?", message: "", preferredStyle: .Alert)
         let OKAction = UIAlertAction(title: "OK", style: .Default){(action) in
-            }
+        }
         alertController.addAction(OKAction)
         self.presentViewController(alertController, animated: true) {
         }
