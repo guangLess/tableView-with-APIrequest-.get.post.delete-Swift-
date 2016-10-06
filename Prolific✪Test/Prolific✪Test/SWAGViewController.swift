@@ -28,14 +28,11 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
     }
     private func refreshTableView() {
         self.result.removeAll()
-        //FIXME: getBookData
-        
         networkController.load(Book.all) { books in
             dispatch_async(dispatch_get_main_queue(), {
-                print("----------------\(books?.count)")
+                //print("----------------\(books?.count)")
                 self.result = books.flatMap({$0})!
-                print(self.result.last)
-                //self.result = result.flatMap()
+                //print(self.result.last)
                 self.bookTableView.reloadData()
             })
         }
@@ -60,12 +57,9 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
         if (segue.identifier == "toDetail") {
             let destinationVC = segue.destinationViewController as? BookDetailViewController
             if let row = bookTableView.indexPathForSelectedRow?.row{
-                print(row)
-                print (result[row])
-                destinationVC?.bookDetail = result[row] as Book 
-                //destinationVC?.book = result[row]
-                //let book : Book = result[row]
-                //destinationVC?.bookDetail = book.dictionary
+                //print(row)
+                //print (result[row])
+                destinationVC?.bookDetail = result[row] as Book
             }
         }
     }

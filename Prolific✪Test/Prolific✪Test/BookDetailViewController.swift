@@ -5,7 +5,6 @@
 //  Created by Guang on 5/2/16.
 //  Copyright © 2016 Guang. All rights reserved.
 //
-
 import UIKit
 import Social
 
@@ -18,7 +17,7 @@ internal final class BookDetailViewController: UIViewController {
     @IBOutlet weak var publisherLabel: UILabel!
     @IBOutlet weak var popUpView: UILabel!
     @IBOutlet weak var lineDivider: UILabel!
-
+    private let noContent = "✍🏾"
     internal var bookDetail = Book(dictionary: [:])
     lazy var networkController = NetworkControllerO()
     
@@ -30,19 +29,23 @@ internal final class BookDetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     private func updateUI() {
+       //FIXME: delete popUpView
         self.popUpView.alpha = 0
-        let noContent = "✍🏾"
-        titleLabel.text = bookDetail?.title
-        authorLabel.text = bookDetail?.author
-        categoryLabel.text = bookDetail?.categories
-        publisherLabel.text = bookDetail?.publisher
+        titleLabel.text = bookDetail?.title ?? noContent
+        authorLabel.text = bookDetail?.author ?? noContent
+        categoryLabel.text = bookDetail?.categories ?? noContent
+        publisherLabel.text = bookDetail?.publisher ?? noContent
         lastCheckedOutLabel.text = String(bookDetail!.lastCheckedOut) ?? noContent
         lastCheckedOutByLabel.text = String(bookDetail!.lastCheckedOutBy) ?? noContent
     }
     // MARK: Actions
     @IBAction func deleteButtonAction(sender: AnyObject) {
+        let title = bookDetail.flatMap({ book in
+           return book.title
+        }) ?? noContent
+        print(title)
         unowned let weakSelf = self
-        let alertController = UIAlertController(title: "You are about to delete 📖", message: "\(bookDetail?.title)!", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "You are about to delete", message: "📖\(title)", preferredStyle: .Alert)
         let OKAction = UIAlertAction(title: "OK", style: .Default){ (action) in
             let bookId = weakSelf.bookDetail!.id
                 weakSelf.networkController.deleteBook(bookId) { (result) in
@@ -55,7 +58,6 @@ internal final class BookDetailViewController: UIViewController {
         alertController.addAction(cancelAction)
         self.presentViewController(alertController, animated: true, completion: nil)
     }
-    
     @IBAction func checkOutAction(sender: UIButton) {
         //FIXME: if the book already checkedout, enable the button/checkout with String Name
         unowned let weakSelf = self
@@ -101,7 +103,6 @@ internal final class BookDetailViewController: UIViewController {
         let share = UIActivityViewController(activityItems:[shareText],applicationActivities: [])
         self.presentViewController(share, animated: true, completion: nil)
     }
-    //FIXME: maybe make it into a potocol?
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.currentDevice().orientation.isLandscape.boolValue {
             print("Landscape")

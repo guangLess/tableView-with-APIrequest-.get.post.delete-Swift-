@@ -5,7 +5,6 @@
 //  Created by Guang on 5/4/16.
 //  Copyright © 2016 Guang. All rights reserved.
 //
-
 import UIKit
 internal final class AddBookViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var addTitle: UITextField!
