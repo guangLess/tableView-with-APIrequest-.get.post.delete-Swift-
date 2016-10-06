@@ -4,10 +4,8 @@
 //
 //  Created by Guang on 10/1/16.
 //  Copyright © 2016 Guang. All rights reserved.
-//
 
 import Foundation
-//import Alamofire
 
 typealias JsonDictionary = [String:AnyObject]
 let api = API()

@@ -13,7 +13,7 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     @IBOutlet weak var addPublisher: UITextField!
     @IBOutlet weak var submitButtonOutlet: UIButton!
     //private var book = Book(dictionary: [:])!
-    //lazy var networkController = librarySystem()
+    lazy var networkController = NetworkControllerO()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +77,7 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
         //book.publisher = sender.text!
     }
     // MARK: TextField related
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    private func textFieldShouldReturn(textField: UITextField) -> Bool {
         if (textField == addTitle){
             addAuthor.enabled = true
             addAuthor.becomeFirstResponder()
@@ -103,11 +103,12 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
         return false
     }
     private func checkTextField(textField: UITextField) -> Bool {
-        if (textField.text?.characters.count == 0) {
+        //FIXME: two returns
+        let checkChar = textField.text?.isEmpty
+        if (!checkChar) {
             alertViewActive(textField.placeholder!)
-            return false
         }
-        return true
+        return checkChar
     }
     // MARK: TextFieldAlert
     private func alertViewActive(missingText : String) {

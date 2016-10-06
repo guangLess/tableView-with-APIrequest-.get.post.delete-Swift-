@@ -4,7 +4,6 @@
 //
 //  Created by Guang on 5/12/16.
 //  Copyright © 2016 Guang. All rights reserved.
-//
 
 import Foundation
 struct API {
