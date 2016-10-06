@@ -20,7 +20,6 @@ internal final class BookDetailViewController: UIViewController {
     @IBOutlet weak var lineDivider: UILabel!
 
     internal var bookDetail = Book(dictionary: [:])
-    //FIXME: networkController
     lazy var networkController = NetworkControllerO()
     
     override func viewDidLoad() {
@@ -30,7 +29,6 @@ internal final class BookDetailViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
     private func updateUI() {
         self.popUpView.alpha = 0
         let noContent = "✍🏾"
@@ -43,51 +41,50 @@ internal final class BookDetailViewController: UIViewController {
     }
     // MARK: Actions
     @IBAction func deleteButtonAction(sender: AnyObject) {
-        let bookId = bookDetail!.id
-        networkController.deleteBook(bookId) { (result) in
-            print("-----delete----")
-            self.navigationController?.popViewControllerAnimated(true)
+        unowned let weakSelf = self
+        let alertController = UIAlertController(title: "You are about to delete 📖", message: "\(bookDetail?.title)!", preferredStyle: .Alert)
+        let OKAction = UIAlertAction(title: "OK", style: .Default){ (action) in
+            let bookId = weakSelf.bookDetail!.id
+                weakSelf.networkController.deleteBook(bookId) { (result) in
+                print("-----delete----")
+                weakSelf.navigationController?.popViewControllerAnimated(true)
+            }
         }
-//        let alertController = UIAlertController(title: "You are about to delete this book", message: "\(self.book.title!)", preferredStyle: .Alert)
-//        let OKAction = UIAlertAction(title: "OK", style: .Default){ (action) in
-//            let bookId = self.book.id.map{$0 as! Int}
-            //FIXME: network
-
-            //self.networkController.deleteBook(bookId!, completion: { (result) in
-            //    dispatch_async(dispatch_get_main_queue(), {
-            //        print("book deleted\(result)")
-            //    })
-            //})
-//            self.navigationController?.popViewControllerAnimated(true)
- //       }
-//        alertController.addAction(OKAction)
-//        let cancelAction = UIAlertAction(title: "Cancle", style: .Default, handler: nil)
-//        alertController.addAction(cancelAction)
-//        self.presentViewController(alertController, animated: true, completion: nil)
+        alertController.addAction(OKAction)
+        let cancelAction = UIAlertAction(title: "Cancle", style: .Default, handler: nil)
+        alertController.addAction(cancelAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     @IBAction func checkOutAction(sender: UIButton) {
+        //FIXME: if the book already checkedout, enable the button/checkout with String Name
+        unowned let weakSelf = self
+        let checkOutText = "You just checked out book\n ✎\(bookDetail!.title), Please enter your name." // FIXME: funnier copy write
+        let chekcoutAlertVC = UIAlertController(title: checkOutText, message:"", preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let checkOutAction = UIAlertAction(title:"Check Out", style: .Default){ action in
+            let nameField = chekcoutAlertVC.textFields?.first
+            print(nameField?.text)
+            if let id = weakSelf.bookDetail?.id,
+            let byName = nameField?.text{
+                weakSelf.checkOutToNetwork(weakSelf.networkController, bookId:id, byName:byName)
+            }
+        }
+        chekcoutAlertVC.addTextFieldWithConfigurationHandler{ input in
+            input.placeholder = "your name"
+        }
+        chekcoutAlertVC.addAction(cancelAction)
+        chekcoutAlertVC.addAction(checkOutAction)
+        self.presentViewController(chekcoutAlertVC, animated: true, completion: nil)
+    }
+    private func checkOutToNetwork(network:NetworkControllerO, bookId:NSNumber, byName:String){
         let todaysDate:NSDate = NSDate()
         let dateFormatter:NSDateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyy-MM-dd HH:mm:ss zzz"
         let dateInFormat = dateFormatter.stringFromDate(todaysDate) as String
-//        let param = ["lastCheckedOut" : dateInFormat,
-//                     "lastCheckedOutBy" : UIDevice.currentDevice().name]
-        
         let param : JsonDictionary = ["lastCheckedOut" : dateInFormat,
-                                       "lastCheckedOutBy" : UIDevice.currentDevice().name]
-        if let bid = bookDetail?.id{
-            networkController.editBook(bid, param: param)
-        }
-        // if let bookId = bookDetail.id {
-            //FIXME: network
-            //networkController.postBook(<#T##book: Book##Book#>, completion: <#T##(Bool) -> ()#>)
-            //self.networkController.editBook(bookId, param: param)
-        //}
-        let checkOutText = "You just checked out book\n ✎\(bookDetail!.title)"
-        popUpView.popAnimation(checkOutText) { _ in
-                self.navigationController?.popViewControllerAnimated(true)
-                }
+                                      "lastCheckedOutBy" :byName]
+        network.editBook(bookId, param: param)
     }
     // MARK: APP extentions
     @IBAction func goToWebAction(sender: AnyObject) {

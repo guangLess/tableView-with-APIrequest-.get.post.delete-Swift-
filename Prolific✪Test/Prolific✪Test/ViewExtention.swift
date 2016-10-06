@@ -10,7 +10,7 @@ import UIKit
 
 extension UILabel {
     func popAnimation(book:String, completion: Bool  -> ()) {
-        
+        //unowned let self = self
         UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             self.alpha = 0.0
             }, completion: {
