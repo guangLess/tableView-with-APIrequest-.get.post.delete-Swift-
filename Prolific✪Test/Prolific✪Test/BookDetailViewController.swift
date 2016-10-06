@@ -21,7 +21,7 @@ internal final class BookDetailViewController: UIViewController {
 
     internal var bookDetail = Book(dictionary: [:])
     //FIXME: networkController
-    //lazy var networkController: NetworkController = librarySystem()
+    lazy var networkController = NetworkControllerO()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,36 +33,21 @@ internal final class BookDetailViewController: UIViewController {
 
     private func updateUI() {
         self.popUpView.alpha = 0
-        let noContent = " "
+        let noContent = "✍🏾"
         titleLabel.text = bookDetail?.title
         authorLabel.text = bookDetail?.author
         categoryLabel.text = bookDetail?.categories
         publisherLabel.text = bookDetail?.publisher
-        lastCheckedOutLabel.text = String(bookDetail?.lastCheckedOut)
-        lastCheckedOutByLabel.text = String(bookDetail?.lastCheckedOutBy)
-        
-        
-//        _ = book.title.flatMap { t in
-//            titleLabel.text = t as? String ?? "✍🏾 No Content"
-//        }
-//        _ = book.author.flatMap({ t in
-//            authorLabel.text = t as? String ?? noContent
-//        })
-//        _ = book.categories.flatMap({ t in
-//            categoryLabel.text = t as? String ?? noContent
-//        })
-//        _ = book.publisher.flatMap({ t in
-//            publisherLabel.text = t as? String ?? noContent
-//        })
-//        _ = book.lastCheckedOut.flatMap({ t in
-//            lastCheckedOutLabel.text = t as? String ?? noContent
-//        })
-//        _ = book.lastCheckedOutBy.flatMap({ t in
-//            lastCheckedOutByLabel.text = t as? String ?? noContent
-//        })
+        lastCheckedOutLabel.text = String(bookDetail!.lastCheckedOut) ?? noContent
+        lastCheckedOutByLabel.text = String(bookDetail!.lastCheckedOutBy) ?? noContent
     }
     // MARK: Actions
     @IBAction func deleteButtonAction(sender: AnyObject) {
+        let bookId = bookDetail!.id
+        networkController.deleteBook(bookId) { (result) in
+            print("-----delete----")
+            self.navigationController?.popViewControllerAnimated(true)
+        }
 //        let alertController = UIAlertController(title: "You are about to delete this book", message: "\(self.book.title!)", preferredStyle: .Alert)
 //        let OKAction = UIAlertAction(title: "OK", style: .Default){ (action) in
 //            let bookId = self.book.id.map{$0 as! Int}
@@ -73,7 +58,7 @@ internal final class BookDetailViewController: UIViewController {
             //        print("book deleted\(result)")
             //    })
             //})
-            self.navigationController?.popViewControllerAnimated(true)
+//            self.navigationController?.popViewControllerAnimated(true)
  //       }
 //        alertController.addAction(OKAction)
 //        let cancelAction = UIAlertAction(title: "Cancle", style: .Default, handler: nil)
@@ -86,12 +71,19 @@ internal final class BookDetailViewController: UIViewController {
         let dateFormatter:NSDateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyy-MM-dd HH:mm:ss zzz"
         let dateInFormat = dateFormatter.stringFromDate(todaysDate) as String
-        let param = ["lastCheckedOut" : dateInFormat,
-                     "lastCheckedOutBy" : UIDevice.currentDevice().name]
-        if let bookId = self.bookDetail?.id {
-            //FIXME: network
-            //self.networkController.editBook(bookId, param: param)
+//        let param = ["lastCheckedOut" : dateInFormat,
+//                     "lastCheckedOutBy" : UIDevice.currentDevice().name]
+        
+        let param : JsonDictionary = ["lastCheckedOut" : dateInFormat,
+                                       "lastCheckedOutBy" : UIDevice.currentDevice().name]
+        if let bid = bookDetail?.id{
+            networkController.editBook(bid, param: param)
         }
+        // if let bookId = bookDetail.id {
+            //FIXME: network
+            //networkController.postBook(<#T##book: Book##Book#>, completion: <#T##(Bool) -> ()#>)
+            //self.networkController.editBook(bookId, param: param)
+        //}
         let checkOutText = "You just checked out book\n ✎\(bookDetail!.title)"
         popUpView.popAnimation(checkOutText) { _ in
                 self.navigationController?.popViewControllerAnimated(true)
@@ -107,16 +99,10 @@ internal final class BookDetailViewController: UIViewController {
             urlToapp.openURL(searchURL)
         }
     }
-    @IBAction func shareButtonAction(sender: UIButton) {
-        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter){
-            let twitterActionSheet: SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-            twitterActionSheet.setInitialText("I checked out\(titleLabel.text)")
-            self.presentViewController(twitterActionSheet, animated: true, completion: nil)
-        } else {
-            let alert = UIAlertController(title: "", message: "You are not loged in on Twitter", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
+    @IBAction func shareButtonAction(sender: UIButton) { //FIXME: App extention 
+        let shareText =  String("I checked out📖\(bookDetail?.title) by \(bookDetail?.author)")
+        let share = UIActivityViewController(activityItems:[shareText],applicationActivities: [])
+        self.presentViewController(share, animated: true, completion: nil)
     }
     //FIXME: maybe make it into a potocol?
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {

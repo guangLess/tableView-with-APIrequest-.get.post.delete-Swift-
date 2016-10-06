@@ -35,8 +35,7 @@ final class NetworkControllerO {
                 }
         }
     }
-    func deleteBook(input: Int, completion: (result: Bool) -> Void) {
-        
+    func deleteBook(input:NSNumber, completion: (result: Bool) -> Void) {
         let bookIDURL = String(format:"%@/%@", api.post,String(input))
         Alamofire.request(.DELETE, bookIDURL)
             .responseJSON {
@@ -48,8 +47,16 @@ final class NetworkControllerO {
                 completion(result:true)
         }
     }
-}
 
+    func editBook (input:NSNumber, param : JsonDictionary) {
+        //FIXME:// put url in the mainVC maybe... so it is less messy here?
+        let bookIDURL = String(format:"%@/%@",api.post,String(input))
+        Alamofire.request(.PUT, bookIDURL, parameters: param)
+            .response { (request, response, data, error) in
+                print(error)
+        }
+    }
+}
 /*
 protocol NetworkController {
     func getBookData(completion: ([Book]) -> ())
@@ -60,6 +67,17 @@ protocol NetworkController {
 
 struct librarySystem: NetworkController {
     private let swagApi = APIKey()
+ 
+ func editBook (input: Int, param : [String: String]) {
+ let url = swagApi.postApi
+ let bookIDURL = String(format:"%@/%@",url,String(input))
+ Alamofire.request(.PUT, bookIDURL, parameters: param)
+ .response { (request, response, data, error) in
+ print(error)
+ }
+ }
+ }
+ 
       func getBookData(completion: ([Book]) -> Void) {
         Alamofire.request(.GET, swagApi.getApi).responseJSON { response in
             switch response.result{
@@ -120,14 +138,6 @@ struct librarySystem: NetworkController {
                 completion(result: "book deleted!")
         }
     }
-    func editBook (input: Int, param : [String: String]) {
-        let url = swagApi.postApi
-        let bookIDURL = String(format:"%@/%@",url,String(input))
-        Alamofire.request(.PUT, bookIDURL, parameters: param)
-            .response { (request, response, data, error) in
-                print(error)
-        }
-    }
-}
+
  */
 
