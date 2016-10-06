@@ -112,11 +112,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Prolific&#x272a;Test/BookDetailViewController.swift"
-            timestampString = "497482238.869472"
+            timestampString = "497486167.942016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "deleteButtonAction(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -128,11 +128,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Prolific&#x272a;Test/BookDetailViewController.swift"
-            timestampString = "497482238.869472"
+            timestampString = "497486167.942016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "checkOutAction(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -144,12 +144,123 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Prolific&#x272a;Test/BookDetailViewController.swift"
-            timestampString = "497482227.245045"
+            timestampString = "497486167.942016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "deleteButtonAction(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prolific_Test.BookDetailViewController.deleteButtonAction (Swift.AnyObject) -&gt; ()"
+                  moduleName = "Prolific&#x272a;Test"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/guang/Documents/swiftie/1stBitbucket/Prolific%E2%9C%AATest/Prolific%E2%9C%AATest/BookDetailViewController.swift"
+                  timestampString = "497488981.381689"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "1767">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prolific_Test.BookDetailViewController.(deleteButtonAction (Swift.AnyObject) -&gt; ()).(closure #2)"
+                  moduleName = "Prolific&#x272a;Test"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/guang/Documents/swiftie/1stBitbucket/Prolific%E2%9C%AATest/Prolific%E2%9C%AATest/BookDetailViewController.swift"
+                  timestampString = "497488981.381787"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prolific_Test.BookDetailViewController.(deleteButtonAction (Swift.AnyObject) -&gt; ()).(closure #2).(closure #1)"
+                  moduleName = "Prolific&#x272a;Test"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/guang/Documents/swiftie/1stBitbucket/Prolific%E2%9C%AATest/Prolific%E2%9C%AATest/BookDetailViewController.swift"
+                  timestampString = "497488981.381872"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prolific&#x272a;Test/AddBookViewController.swift"
+            timestampString = "497488813.638818"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "publisher(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prolific&#x272a;Test/AddBookViewController.swift"
+            timestampString = "497488813.638818"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "textFieldShouldReturn(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prolific&#x272a;Test/AddBookViewController.swift"
+            timestampString = "497488813.638818"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "textFieldShouldReturn(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prolific&#x272a;Test/AddBookViewController.swift"
+            timestampString = "497488813.638818"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "textFieldShouldReturn(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

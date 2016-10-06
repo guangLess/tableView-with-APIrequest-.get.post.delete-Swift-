@@ -12,13 +12,20 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     @IBOutlet weak var addCatories: UITextField!
     @IBOutlet weak var addPublisher: UITextField!
     @IBOutlet weak var submitButtonOutlet: UIButton!
-    //private var book = Book(dictionary: [:])!
+    //var book = Book(dictionary: [:])
+    var bookContent : JsonDictionary = [:]
     lazy var networkController = NetworkControllerO()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addDelegates()
-        submitButtonOutlet.enabled = false
+        //submitButtonOutlet.enabled = false
+        
+//        if (checkTextField(textField: UITextField) == false) {
+//            
+//        }
+
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -31,6 +38,10 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     }
     // MARK : Submit
     @IBAction func submitButtonAction(sender: AnyObject) {
+//        if let title = book?.title{
+//            
+//        }
+        
        /*
         if let title = book.title {
             if let author = book.author {
@@ -58,26 +69,30 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     @IBAction func titleInput(sender: UITextField) {
         checkTextField(sender)
         print ("title check")
-       // book.title = sender.text!
+        //book?.title = sender.text
+        bookContent["title"] = sender.text ?? ""
     }
     @IBAction func authorInput(sender: UITextField) {
         checkTextField(sender)
         print ("author  check")
-        //book.author = sender.text!
+        //book?.author = sender.text
+        bookContent["author"] = sender.text ?? ""
     }
     @IBAction func catagrpyInput(sender: UITextField) {
         checkTextField(sender)
         print ("catagory  check")
-        //book.categories = sender.text!
+        bookContent["catagory"] = sender.text ?? ""
+        //book?.categories = sender.text
         resignFirstResponder()
     }
     @IBAction func publisher(sender: UITextField) {
         checkTextField(sender)
         print ("publisher checker")
-        //book.publisher = sender.text!
+        bookContent["publisher"] = sender.text ?? ""
+        //book?.publisher = sender.text
     }
-    // MARK: TextField related
-    private func textFieldShouldReturn(textField: UITextField) -> Bool {
+    //FIXME: TextField delegate in swift
+    @objc internal func textFieldShouldReturn(textField: UITextField) -> Bool {
         if (textField == addTitle){
             addAuthor.enabled = true
             addAuthor.becomeFirstResponder()
@@ -97,22 +112,26 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
             submitButtonOutlet.enabled = true
             view.endEditing(true)
             submitButtonOutlet.setTitle("📖 submit", forState: .Normal)
-           // print(book.dictionary)
+            print(bookContent)
             return true
         }
         return false
     }
-    private func checkTextField(textField: UITextField) -> Bool {
-        //FIXME: two returns
-        let checkChar = textField.text?.isEmpty
-        if (!checkChar) {
-            alertViewActive(textField.placeholder!)
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        if(checkTextField(textField) == false){
+            alertViewActive("Need to put content")
         }
-        return checkChar
+    }
+    private func checkTextField(textField: UITextField) -> Bool {
+        let input = textField.text.flatMap { x in
+            return x as String
+        } ?? ""
+        return input.isEmpty
     }
     // MARK: TextFieldAlert
     private func alertViewActive(missingText : String) {
-        let alertController = UIAlertController(title: "\(missingText)?", message: "", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "\(missingText)", message: "", preferredStyle: .Alert)
         let OKAction = UIAlertAction(title: "OK", style: .Default){(action) in
         }
         alertController.addAction(OKAction)
