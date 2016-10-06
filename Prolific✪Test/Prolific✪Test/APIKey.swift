@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct APIKey {
-    let getApi = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books?"
-    let postApi = "http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books"
+struct API {
+    let get = NSURL(string:"http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books?")!
+    let post = NSURL(string:"http://prolific-interview.herokuapp.com/5720c9b20574870009d73afc/books")!
 }

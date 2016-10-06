@@ -12,7 +12,8 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
     private struct Storyboard {
         static let CellReuseIdentifier = "cell"
     }
-    lazy var networkController: NetworkController = librarySystem()
+    //FIXME:networkController
+    lazy var networkController = NetworkControllerO()
     var result = [Book]()
     
     override func viewDidLoad() {
@@ -27,9 +28,14 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
     }
     private func refreshTableView() {
         self.result.removeAll()
-        networkController.getBookData { books in
+        //FIXME: getBookData
+        
+        networkController.load(Book.all) { books in
             dispatch_async(dispatch_get_main_queue(), {
-                self.result = books
+                print("----------------\(books?.count)")
+                self.result = books.flatMap({$0})!
+                print(self.result.last)
+                //self.result = result.flatMap()
                 self.bookTableView.reloadData()
             })
         }
@@ -44,14 +50,10 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let bookCell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as! BookTableViewCell
         let bookC = result[indexPath.row]
-        _ = bookC.title.map { title in
-            bookCell.titleLabel.text = title as? String
-            bookCell.titleLabel.sizeToFit()
-        }
-        _ = bookC.author.map({ author in
-            bookCell.authorLabel.text = author as? String
-            bookCell.authorLabel.sizeToFit()
-        })
+        bookCell.titleLabel.text = bookC.title
+        bookCell.authorLabel.text = bookC.author
+        bookCell.titleLabel.sizeToFit()
+        bookCell.authorLabel.sizeToFit()
         return bookCell
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -60,7 +62,10 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
             if let row = bookTableView.indexPathForSelectedRow?.row{
                 print(row)
                 print (result[row])
-                destinationVC?.book = result[row]
+                destinationVC?.bookDetail = result[row] as Book 
+                //destinationVC?.book = result[row]
+                //let book : Book = result[row]
+                //destinationVC?.bookDetail = book.dictionary
             }
         }
     }

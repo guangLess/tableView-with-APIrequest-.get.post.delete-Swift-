@@ -8,6 +8,49 @@
 import Foundation
 import Alamofire
 
+final class NetworkControllerO {
+    func load<A>(resource: Resource<A>, completion: (A?) -> ()) {
+        Alamofire.request(.GET, api.get).responseJSON { response in
+            switch response.result{
+            case .Success:
+                //print(response.result.value)
+                let result = response.data.flatMap(resource.parse)
+                completion(result)
+            case .Failure(let error):
+                print(error)
+            }
+        }
+    }
+    func postBook(book:Book ,completion: (Bool) -> ()) {
+        Alamofire.request(.POST,api.post, parameters: book.dictionary, encoding: .JSON)
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .Success:
+                    completion(true)
+                    break
+                case .Failure:
+                    print(ErrorType)
+                    break
+                }
+        }
+    }
+    func deleteBook(input: Int, completion: (result: Bool) -> Void) {
+        
+        let bookIDURL = String(format:"%@/%@", api.post,String(input))
+        Alamofire.request(.DELETE, bookIDURL)
+            .responseJSON {
+                response in
+                guard response.result.error == nil else {
+                    print("error\(response.result.error)")
+                    return
+                }
+                completion(result:true)
+        }
+    }
+}
+
+/*
 protocol NetworkController {
     func getBookData(completion: ([Book]) -> ())
     func postAbook(book:Book, completion: (result: Bool) -> ())
@@ -86,3 +129,5 @@ struct librarySystem: NetworkController {
         }
     }
 }
+ */
+

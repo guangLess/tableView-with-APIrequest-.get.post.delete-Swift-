@@ -7,34 +7,70 @@
 //
 
 import Foundation
+//import Alamofire
+
+typealias JsonDictionary = [String:AnyObject]
+let api = API()
 
 struct Book {
-    var author: AnyObject?
-    var categories: AnyObject?
-    var id: AnyObject?
-    var lastCheckedOut: AnyObject?
-    var lastCheckedOutBy: AnyObject?
-    var publisher: AnyObject?
-    var title: AnyObject?
-    var url: AnyObject?
-    var dictionary: [String : String] {
+    let author: String
+    let title: String
+    let categories: String
+    let id: NSNumber
+    let lastCheckedOut: AnyObject
+    let lastCheckedOutBy: AnyObject
+    let publisher: String
+    let url: AnyObject
+    var dictionary: JsonDictionary {
         get {
             return [
-                "author": castToString(author),
-                "title":castToString(title),
-                "categories": castToString(categories),
-                "id":castToString(id),
-                "lastCheckedOut":castToString(lastCheckedOut),
-                "lastCheckedOutBy":castToString(lastCheckedOutBy),
-                "publisher": castToString(publisher),
-                "url":castToString(url),
+                "author": author,
+                "title":title,
+                "categories": categories,
+                "id":id,
+                "lastCheckedOut":lastCheckedOut,
+                "lastCheckedOutBy":lastCheckedOutBy,
+                "publisher": publisher,
+                "url":url
             ]
         }
     }
-    private func castToString(content: AnyObject?) -> String {
-        if let returnString = content {
-            return returnString as! String
+    init?(dictionary:JsonDictionary) {
+        guard let author = dictionary["author"] as? String,
+            let title = dictionary["title"] as? String,
+            let categories = dictionary["categories"] as? String,
+            let id = dictionary["id"] as? NSNumber,
+            let lastCheckedOut = dictionary["lastCheckedOut"],
+            let lastCheckedOutBy = dictionary["lastCheckedOutBy"],
+            let publisher = dictionary["publisher"] as? String,
+            let url = dictionary["url"] else { return nil }
+        
+        self.author = author
+        self.title = title
+        self.categories = categories
+        self.id = id
+        self.lastCheckedOut = lastCheckedOut
+        self.lastCheckedOutBy = lastCheckedOutBy
+        self.publisher = publisher
+        self.url = url
+        
+    }
+}
+extension Book {
+    static let all = Resource<[Book]>(parseJSON: { json in
+        guard let dictionaries = json as? [JsonDictionary] else { return nil }
+        return dictionaries.flatMap(Book.init)
+    })
+}
+struct Resource<A> {
+    //let url: NSURL
+    let parse: NSData -> A?
+    init(parseJSON: AnyObject -> A?){
+        //self.url = url
+        self.parse = { data in
+            let json = try? NSJSONSerialization.JSONObjectWithData(data, options: [])
+            print(json)
+            return json.flatMap(parseJSON)
         }
-        return "noData"
     }
 }

@@ -19,8 +19,9 @@ internal final class BookDetailViewController: UIViewController {
     @IBOutlet weak var popUpView: UILabel!
     @IBOutlet weak var lineDivider: UILabel!
 
-    internal var book = Book()
-    lazy var networkController: NetworkController = librarySystem()
+    internal var bookDetail = Book(dictionary: [:])
+    //FIXME: networkController
+    //lazy var networkController: NetworkController = librarySystem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,45 +30,55 @@ internal final class BookDetailViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+
     private func updateUI() {
         self.popUpView.alpha = 0
         let noContent = " "
-        _ = book.title.flatMap { t in
-            titleLabel.text = t as? String ?? "✍🏾 No Content"
-        }
-        _ = book.author.flatMap({ t in
-            authorLabel.text = t as? String ?? noContent
-        })
-        _ = book.categories.flatMap({ t in
-            categoryLabel.text = t as? String ?? noContent
-        })
-        _ = book.publisher.flatMap({ t in
-            publisherLabel.text = t as? String ?? noContent
-        })
-        _ = book.lastCheckedOut.flatMap({ t in
-            lastCheckedOutLabel.text = t as? String ?? noContent
-        })
-        _ = book.lastCheckedOutBy.flatMap({ t in
-            lastCheckedOutByLabel.text = t as? String ?? noContent
-        })
+        titleLabel.text = bookDetail?.title
+        authorLabel.text = bookDetail?.author
+        categoryLabel.text = bookDetail?.categories
+        publisherLabel.text = bookDetail?.publisher
+        lastCheckedOutLabel.text = String(bookDetail?.lastCheckedOut)
+        lastCheckedOutByLabel.text = String(bookDetail?.lastCheckedOutBy)
+        
+        
+//        _ = book.title.flatMap { t in
+//            titleLabel.text = t as? String ?? "✍🏾 No Content"
+//        }
+//        _ = book.author.flatMap({ t in
+//            authorLabel.text = t as? String ?? noContent
+//        })
+//        _ = book.categories.flatMap({ t in
+//            categoryLabel.text = t as? String ?? noContent
+//        })
+//        _ = book.publisher.flatMap({ t in
+//            publisherLabel.text = t as? String ?? noContent
+//        })
+//        _ = book.lastCheckedOut.flatMap({ t in
+//            lastCheckedOutLabel.text = t as? String ?? noContent
+//        })
+//        _ = book.lastCheckedOutBy.flatMap({ t in
+//            lastCheckedOutByLabel.text = t as? String ?? noContent
+//        })
     }
     // MARK: Actions
     @IBAction func deleteButtonAction(sender: AnyObject) {
-        let alertController = UIAlertController(title: "You are about to delete this book", message: "\(self.book.title!)", preferredStyle: .Alert)
-        let OKAction = UIAlertAction(title: "OK", style: .Default){ (action) in
-            let bookId = self.book.id.map{$0 as! Int}
-            self.networkController.deleteBook(bookId!, completion: { (result) in
-                dispatch_async(dispatch_get_main_queue(), {
-                    print("book deleted\(result)")
-                })
-            })
+//        let alertController = UIAlertController(title: "You are about to delete this book", message: "\(self.book.title!)", preferredStyle: .Alert)
+//        let OKAction = UIAlertAction(title: "OK", style: .Default){ (action) in
+//            let bookId = self.book.id.map{$0 as! Int}
+            //FIXME: network
+
+            //self.networkController.deleteBook(bookId!, completion: { (result) in
+            //    dispatch_async(dispatch_get_main_queue(), {
+            //        print("book deleted\(result)")
+            //    })
+            //})
             self.navigationController?.popViewControllerAnimated(true)
-        }
-        alertController.addAction(OKAction)
-        let cancelAction = UIAlertAction(title: "Cancle", style: .Default, handler: nil)
-        alertController.addAction(cancelAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
+ //       }
+//        alertController.addAction(OKAction)
+//        let cancelAction = UIAlertAction(title: "Cancle", style: .Default, handler: nil)
+//        alertController.addAction(cancelAction)
+//        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     @IBAction func checkOutAction(sender: UIButton) {
@@ -77,14 +88,14 @@ internal final class BookDetailViewController: UIViewController {
         let dateInFormat = dateFormatter.stringFromDate(todaysDate) as String
         let param = ["lastCheckedOut" : dateInFormat,
                      "lastCheckedOutBy" : UIDevice.currentDevice().name]
-        if let bookId = self.book.id as? Int {
-            self.networkController.editBook(bookId, param: param)
+        if let bookId = self.bookDetail?.id {
+            //FIXME: network
+            //self.networkController.editBook(bookId, param: param)
         }
-        let checkOutText = "You just checked out book\n ✎\(book.title!)"
+        let checkOutText = "You just checked out book\n ✎\(bookDetail!.title)"
         popUpView.popAnimation(checkOutText) { _ in
                 self.navigationController?.popViewControllerAnimated(true)
                 }
-        
     }
     // MARK: APP extentions
     @IBAction func goToWebAction(sender: AnyObject) {

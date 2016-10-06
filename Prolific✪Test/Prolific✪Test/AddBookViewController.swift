@@ -13,8 +13,8 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     @IBOutlet weak var addCatories: UITextField!
     @IBOutlet weak var addPublisher: UITextField!
     @IBOutlet weak var submitButtonOutlet: UIButton!
-    private var book = Book()
-    lazy var networkController = librarySystem()
+    //private var book = Book(dictionary: [:])!
+    //lazy var networkController = librarySystem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +32,7 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     }
     // MARK : Submit
     @IBAction func submitButtonAction(sender: AnyObject) {
+       /*
         if let title = book.title {
             if let author = book.author {
                 let submitString = "📖 \(title) by \(author) is about to be added"
@@ -50,6 +51,7 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
                 presentViewController(addBookalertVC, animated: true, completion: nil)
             }
         }
+ */
     }
     @IBAction func BackButtonAction(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil);
@@ -57,23 +59,23 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     @IBAction func titleInput(sender: UITextField) {
         checkTextField(sender)
         print ("title check")
-        book.title = sender.text!
+       // book.title = sender.text!
     }
     @IBAction func authorInput(sender: UITextField) {
         checkTextField(sender)
         print ("author  check")
-        book.author = sender.text!
+        //book.author = sender.text!
     }
     @IBAction func catagrpyInput(sender: UITextField) {
         checkTextField(sender)
         print ("catagory  check")
-        book.categories = sender.text!
+        //book.categories = sender.text!
         resignFirstResponder()
     }
     @IBAction func publisher(sender: UITextField) {
         checkTextField(sender)
         print ("publisher checker")
-        book.publisher = sender.text!
+        //book.publisher = sender.text!
     }
     // MARK: TextField related
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -96,7 +98,7 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
             submitButtonOutlet.enabled = true
             view.endEditing(true)
             submitButtonOutlet.setTitle("📖 submit", forState: .Normal)
-            print(book.dictionary)
+           // print(book.dictionary)
             return true
         }
         return false
