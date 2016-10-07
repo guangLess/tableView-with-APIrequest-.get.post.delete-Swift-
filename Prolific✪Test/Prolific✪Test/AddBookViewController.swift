@@ -30,7 +30,11 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     }
     // MARK : Submit
     @IBAction func submitButtonAction(sender: AnyObject) {
-        let submitString = "📖 \(bookContent["title"].flatMap({$0})) by \(bookContent["title"].flatMap({$0}))is about to be added"
+        
+        let title = bookContent["title"].flatMap { x in
+            return String(x)
+        } ?? ""
+        let submitString = "📖 \(title) is about to be added"
         let addBookalertVC = UIAlertController(title:nil, message: submitString, preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "Great💥submit", style: .Default){ _ in
              self.networkController.postBook(self.bookContent, completion: { [weak self]_ in
@@ -59,8 +63,8 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     }
     @IBAction func catagrpyInput(sender: UITextField) {
         checkTextField(sender)
-        print ("catagory  check")
-        bookContent["catagory"] = sender.text ?? ""
+        print ("categories check")
+        bookContent["categories"] = sender.text ?? ""
         resignFirstResponder()
     }
     @IBAction func publisher(sender: UITextField) {

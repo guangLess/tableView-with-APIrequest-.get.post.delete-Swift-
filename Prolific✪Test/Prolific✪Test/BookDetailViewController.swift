@@ -32,8 +32,13 @@ internal final class BookDetailViewController: UIViewController {
         authorLabel.text = bookDetail?.author ?? noContent
         categoryLabel.text = bookDetail?.categories ?? noContent
         publisherLabel.text = bookDetail?.publisher ?? noContent
-        lastCheckedOutLabel.text = String(bookDetail!.lastCheckedOut) ?? noContent
-        lastCheckedOutByLabel.text = String(bookDetail!.lastCheckedOutBy) ?? noContent
+        
+        if let lastCheckedOut = bookDetail?.lastCheckedOut {
+            lastCheckedOutLabel.text = lastCheckedOut as? String ?? noContent
+        }
+        if let lastCheckedoutBy = bookDetail?.lastCheckedOutBy{
+            lastCheckedOutByLabel.text = lastCheckedoutBy as? String ?? noContent
+        }
     }
     // MARK: Actions
     @IBAction func deleteButtonAction(sender: AnyObject) {
@@ -42,17 +47,18 @@ internal final class BookDetailViewController: UIViewController {
         }) ?? noContent
         unowned let weakSelf = self
         let alertController = UIAlertController(title: "You are about to delete", message: "📖\(title)", preferredStyle: .Alert)
-        let OKAction = UIAlertAction(title: "OK", style: .Default){ (action) in
+        let OKAction = UIAlertAction(title: "Delete", style: .Destructive){ (action) in
             let bookId = weakSelf.bookDetail!.id
                 weakSelf.networkController.deleteBook(bookId) { (result) in
                 print("-----delete----")
                 weakSelf.navigationController?.popViewControllerAnimated(true)
             }
         }
-        alertController.addAction(OKAction)
-        let cancelAction = UIAlertAction(title: "Cancle", style: .Default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
         alertController.addAction(cancelAction)
+        alertController.addAction(OKAction)
         self.presentViewController(alertController, animated: true, completion: nil)
+        
     }
     @IBAction func checkOutAction(sender: UIButton) {
         //FIXME: if the book already checkedout, enable the button
@@ -66,15 +72,15 @@ internal final class BookDetailViewController: UIViewController {
             let byName = nameField?.text{
                 weakSelf.checkOutToNetwork(weakSelf.networkController, bookId:id, byName:byName)
             }
+            weakSelf.navigationController?.popViewControllerAnimated(true)
         }
         chekcoutAlertVC.addTextFieldWithConfigurationHandler{ input in
             input.placeholder = "your name"
         }
-        chekcoutAlertVC.addAction(cancelAction)
         chekcoutAlertVC.addAction(checkOutAction)
-        self.presentViewController(chekcoutAlertVC, animated: true, completion:{ 
-            weakSelf.navigationController?.popViewControllerAnimated(true)
-            })
+        chekcoutAlertVC.addAction(cancelAction)
+        self.presentViewController(chekcoutAlertVC, animated: true, completion:nil)
+        
     }
     private func checkOutToNetwork(network:NetworkController, bookId:NSNumber, byName:String){
         let todaysDate:NSDate = NSDate()

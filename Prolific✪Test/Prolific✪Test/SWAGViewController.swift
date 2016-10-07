@@ -29,9 +29,9 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
         self.result.removeAll()
         networkController.load(Book.all) { books in
             dispatch_async(dispatch_get_main_queue(), {
-                //print("----------------\(books?.count)")
+                print("----------------\(books?.count)")
                 self.result = books.flatMap({$0})!
-                //print(self.result.last)
+                print(self.result.last)
                 self.bookTableView.reloadData()
             })
         }
