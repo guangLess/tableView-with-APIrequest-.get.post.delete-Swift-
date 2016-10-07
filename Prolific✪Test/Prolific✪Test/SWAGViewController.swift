@@ -12,8 +12,7 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
     private struct Storyboard {
         static let CellReuseIdentifier = "cell"
     }
-    //FIXME:networkController
-    lazy var networkController = NetworkControllerO()
+    lazy var networkController = NetworkController()
     var result = [Book]()
     
     override func viewDidLoad() {

@@ -12,20 +12,12 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     @IBOutlet weak var addCatories: UITextField!
     @IBOutlet weak var addPublisher: UITextField!
     @IBOutlet weak var submitButtonOutlet: UIButton!
-    //var book = Book(dictionary: [:])
-    var bookContent : JsonDictionary = [:]
-    lazy var networkController = NetworkControllerO()
+    private var bookContent : JsonDictionary = [:]
+    lazy var networkController = NetworkController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addDelegates()
-        //submitButtonOutlet.enabled = false
-        
-//        if (checkTextField(textField: UITextField) == false) {
-//            
-//        }
-
-        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -38,14 +30,11 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
     }
     // MARK : Submit
     @IBAction func submitButtonAction(sender: AnyObject) {
-//        if let title = book?.title{
-//        }
-        //let postBook = Book(dictionary: bookContent)
-        let submitString = "📖 \(bookContent["title"]) by \(bookContent["title"])is about to be added"
+        let submitString = "📖 \(bookContent["title"].flatMap({$0})) by \(bookContent["title"].flatMap({$0}))is about to be added"
         let addBookalertVC = UIAlertController(title:nil, message: submitString, preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "Great💥submit", style: .Default){ _ in
-             self.networkController.postBook(self.bookContent, completion: { _ in
-                self.dismissViewControllerAnimated(true, completion: nil)
+             self.networkController.postBook(self.bookContent, completion: { [weak self]_ in
+                self?.dismissViewControllerAnimated(true, completion: nil)
              })
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel){ _ in
@@ -54,26 +43,6 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
         addBookalertVC.addAction(cancelAction)
         addBookalertVC.addAction(okAction)
         presentViewController(addBookalertVC, animated: true, completion: nil)
-       /*
-        if let title = book.title {
-            if let author = book.author {
-                let submitString = "📖 \(title) by \(author) is about to be added"
-                let addBookalertVC = UIAlertController(title:nil, message: submitString, preferredStyle: .Alert)
-                let okAction = UIAlertAction(title: "Great💥submit", style: .Default){ _ in
-                    self.networkController.postAbook(self.book) { result in
-                        print("result = \(result) book added\(self.book.dictionary)")
-                    }
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                }
-                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel){ _ in
-                    self.submitButtonOutlet.setTitle("Submit 📖 again", forState: .Normal)
-                }
-                addBookalertVC.addAction(cancelAction)
-                addBookalertVC.addAction(okAction)
-                presentViewController(addBookalertVC, animated: true, completion: nil)
-            }
-        }
- */
     }
     @IBAction func BackButtonAction(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil);
@@ -124,53 +93,27 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
         }
         return false
     }
-   
-//    func textFieldShouldEndEditing(textField: UITextField) {
-//        if(checkTextField(textField) == false){
-//            alertViewActive("Need to put content")
-//        }
-//    }
-    
     private func checkTextField(textField: UITextField) -> Bool {
-//        let input = textField.text.flatMap { x in
-//            return x
-//        } ?? ""
-//        if (input.isEmpty){
-//            alertViewActive("Need to put content here")
-//        }
-//        return input.isEmpty
-        // var textStatus: Bool let components = string.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).filter { !$0.isEmpty }
-        
         let input = textField.text?.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).filter{(!$0.isEmpty)}
         if (input?.count == 0){
             alertViewActive("Need to put content here")
             return false
         }
         return true
-//        let input = textField.text.flatMap({ x in
-//            
-//            if (x.isEmpty & x.characters.count)
-//            
-//            
-//            return x
-//       })
-        
-        //return input
-    
-//        {
-//            textStatus = input.isEmpty
-//            if textStatus {
-//                alertViewActive("Need to put content here")
-//            }
-//        }
-        
     }
     private func alertViewActive(missingText : String) {
         let alertController = UIAlertController(title: "\(missingText)", message: "", preferredStyle: .Alert)
-        let OKAction = UIAlertAction(title: "OK", style: .Default){(action) in
-        }
+        let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alertController.addAction(OKAction)
-        self.presentViewController(alertController, animated: true) {
-        }
+        self.presentViewController(alertController, animated: true, completion: nil)
+        //self.presentViewController(alertController, animated: true)
     }
 }
+
+
+
+
+
+
+
+

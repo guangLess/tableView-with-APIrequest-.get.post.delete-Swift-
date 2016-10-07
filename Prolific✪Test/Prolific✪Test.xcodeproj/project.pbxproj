@@ -23,7 +23,6 @@
 		62980A551CF8F1C8009DD16B /* BookApidCallSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62980A541CF8F1C8009DD16B /* BookApidCallSpec.swift */; };
 		62980A571CF900C5009DD16B /* BookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62980A561CF900C5009DD16B /* BookTests.swift */; };
 		62F06CF91DA0302600353999 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F06CF81DA0302600353999 /* NetworkController.swift */; };
-		62F06CFB1DA1B4AD00353999 /* ViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F06CFA1DA1B4AD00353999 /* ViewExtention.swift */; };
 		C4B8E8A6C3F0592F726337A4 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 572B6A2B35E68AC877E6999E /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,7 +68,6 @@
 		62980A541CF8F1C8009DD16B /* BookApidCallSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookApidCallSpec.swift; sourceTree = "<group>"; };
 		62980A561CF900C5009DD16B /* BookTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookTests.swift; sourceTree = "<group>"; };
 		62F06CF81DA0302600353999 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
-		62F06CFA1DA1B4AD00353999 /* ViewExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtention.swift; sourceTree = "<group>"; };
 		ECFBA6390B6D76BBDB61EABE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,7 +132,6 @@
 				624C02581CD7EC7E009F90B3 /* BookDetailViewController.swift */,
 				624C025A1CDA7C14009F90B3 /* AddBookViewController.swift */,
 				624C02561CD7CBC3009F90B3 /* BookTableViewCell.swift */,
-				62F06CFA1DA1B4AD00353999 /* ViewExtention.swift */,
 				624C02241CD3C022009F90B3 /* Main.storyboard */,
 			);
 			path = "Prolific✪Test";
@@ -370,7 +367,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62F06CFB1DA1B4AD00353999 /* ViewExtention.swift in Sources */,
 				624C024F1CD3CC66009F90B3 /* SWAGViewController.swift in Sources */,
 				624C02591CD7EC7E009F90B3 /* BookDetailViewController.swift in Sources */,
 				624C025B1CDA7C14009F90B3 /* AddBookViewController.swift in Sources */,

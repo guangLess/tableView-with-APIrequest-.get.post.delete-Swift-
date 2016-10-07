@@ -15,11 +15,10 @@ internal final class BookDetailViewController: UIViewController {
     @IBOutlet weak var lastCheckedOutLabel: UILabel!
     @IBOutlet weak var lastCheckedOutByLabel: UILabel!
     @IBOutlet weak var publisherLabel: UILabel!
-    @IBOutlet weak var popUpView: UILabel!
     @IBOutlet weak var lineDivider: UILabel!
     private let noContent = "✍🏾"
     internal var bookDetail = Book(dictionary: [:])
-    lazy var networkController = NetworkControllerO()
+    lazy var networkController = NetworkController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +28,6 @@ internal final class BookDetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     private func updateUI() {
-       //FIXME: delete popUpView
-        self.popUpView.alpha = 0
         titleLabel.text = bookDetail?.title ?? noContent
         authorLabel.text = bookDetail?.author ?? noContent
         categoryLabel.text = bookDetail?.categories ?? noContent
@@ -59,7 +56,7 @@ internal final class BookDetailViewController: UIViewController {
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     @IBAction func checkOutAction(sender: UIButton) {
-        //FIXME: if the book already checkedout, enable the button/checkout with String Name
+        //FIXME: if the book already checkedout, enable the button
         unowned let weakSelf = self
         let checkOutText = "You just checked out book\n ✎\(bookDetail!.title), Please enter your name." // FIXME: funnier copy write
         let chekcoutAlertVC = UIAlertController(title: checkOutText, message:"", preferredStyle: .Alert)
@@ -77,9 +74,11 @@ internal final class BookDetailViewController: UIViewController {
         }
         chekcoutAlertVC.addAction(cancelAction)
         chekcoutAlertVC.addAction(checkOutAction)
-        self.presentViewController(chekcoutAlertVC, animated: true, completion: nil)
+        self.presentViewController(chekcoutAlertVC, animated: true, completion:{ 
+            weakSelf.navigationController?.popViewControllerAnimated(true)
+            })
     }
-    private func checkOutToNetwork(network:NetworkControllerO, bookId:NSNumber, byName:String){
+    private func checkOutToNetwork(network:NetworkController, bookId:NSNumber, byName:String){
         let todaysDate:NSDate = NSDate()
         let dateFormatter:NSDateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyy-MM-dd HH:mm:ss zzz"
