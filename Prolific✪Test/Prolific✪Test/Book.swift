@@ -61,13 +61,10 @@ extension Book {
     })
 }
 struct Resource<A> {
-    //let url: NSURL
     let parse: NSData -> A?
     init(parseJSON: AnyObject -> A?){
-        //self.url = url
         self.parse = { data in
             let json = try? NSJSONSerialization.JSONObjectWithData(data, options: [])
-            print(json)
             return json.flatMap(parseJSON)
         }
     }

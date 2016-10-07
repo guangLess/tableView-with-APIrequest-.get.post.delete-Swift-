@@ -106,14 +106,8 @@ internal final class AddBookViewController: UIViewController, UITextFieldDelegat
         let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alertController.addAction(OKAction)
         self.presentViewController(alertController, animated: true, completion: nil)
-        //self.presentViewController(alertController, animated: true)
     }
 }
-
-
-
-
-
 
 
 

@@ -56,8 +56,6 @@ internal final class SWAGViewController: UIViewController, UITableViewDataSource
         if (segue.identifier == "toDetail") {
             let destinationVC = segue.destinationViewController as? BookDetailViewController
             if let row = bookTableView.indexPathForSelectedRow?.row{
-                //print(row)
-                //print (result[row])
                 destinationVC?.bookDetail = result[row] as Book
             }
         }

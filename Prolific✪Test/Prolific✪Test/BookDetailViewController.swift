@@ -40,7 +40,6 @@ internal final class BookDetailViewController: UIViewController {
         let title = bookDetail.flatMap({ book in
            return book.title
         }) ?? noContent
-        print(title)
         unowned let weakSelf = self
         let alertController = UIAlertController(title: "You are about to delete", message: "📖\(title)", preferredStyle: .Alert)
         let OKAction = UIAlertAction(title: "OK", style: .Default){ (action) in
@@ -63,7 +62,6 @@ internal final class BookDetailViewController: UIViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         let checkOutAction = UIAlertAction(title:"Check Out", style: .Default){ action in
             let nameField = chekcoutAlertVC.textFields?.first
-            print(nameField?.text)
             if let id = weakSelf.bookDetail?.id,
             let byName = nameField?.text{
                 weakSelf.checkOutToNetwork(weakSelf.networkController, bookId:id, byName:byName)

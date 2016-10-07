@@ -13,7 +13,6 @@ final class NetworkController{
         Alamofire.request(.GET, api.get).responseJSON { response in
             switch response.result{
             case .Success:
-                //print(response.result.value)
                 let result = response.data.flatMap(resource.parse)
                 completion(result)
             case .Failure(let error):
@@ -21,7 +20,7 @@ final class NetworkController{
             }
         }
     }
-    func postBook(book:JsonDictionary,completion: (Bool) -> ()) { //FIXME: optional add?
+    func postBook(book:JsonDictionary,completion: (Bool) -> ()) {
         Alamofire.request(.POST,api.post, parameters: book, encoding: .JSON)
             .validate()
             .responseJSON { response in
@@ -48,7 +47,6 @@ final class NetworkController{
         }
     }
     func editBook (input:NSNumber, param : JsonDictionary) {
-        //FIXME:// put url in the mainVC maybe... so it is less messy here?
         let bookIDURL = String(format:"%@/%@",api.post,String(input))
         Alamofire.request(.PUT, bookIDURL, parameters: param)
             .response { (request, response, data, error) in
