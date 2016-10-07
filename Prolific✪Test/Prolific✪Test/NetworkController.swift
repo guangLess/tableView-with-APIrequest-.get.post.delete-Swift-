@@ -21,8 +21,8 @@ final class NetworkControllerO {
             }
         }
     }
-    func postBook(book:Book ,completion: (Bool) -> ()) {
-        Alamofire.request(.POST,api.post, parameters: book.dictionary, encoding: .JSON)
+    func postBook(book:JsonDictionary,completion: (Bool) -> ()) { //FIXME: optional add?
+        Alamofire.request(.POST,api.post, parameters: book, encoding: .JSON)
             .validate()
             .responseJSON { response in
                 switch response.result {
@@ -47,7 +47,6 @@ final class NetworkControllerO {
                 completion(result:true)
         }
     }
-
     func editBook (input:NSNumber, param : JsonDictionary) {
         //FIXME:// put url in the mainVC maybe... so it is less messy here?
         let bookIDURL = String(format:"%@/%@",api.post,String(input))
